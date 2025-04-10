@@ -5,4 +5,10 @@
     <string name="password_text">Jelszó</string>
     <string name="register_text">Regisztráció</string>
     <string name="not_registered_text">Nincs még fiókja?</string>
+    <string name="password_confirm_text">Jelszó megerősítése</string>
+    <string name="full_name_text">Teljes név</string>
+    <string name="phone_number_text">Telefonszám</string>
+    <string name="email_address_text">E-mail cím</string>
+    <string name="address_text">Lakcím</string>
+    <string name="cancel_text">Vissza</string>
 </resources>

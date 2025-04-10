@@ -1,6 +1,7 @@
 package com.example.okmanyirodaugyintezes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,30 +26,38 @@ public class MainActivity extends AppCompatActivity {
     EditText usernameEditText;
     EditText passwordEditText;
 
+    // SAVED FIELDS - for saving the typed in username and password
+    private SharedPreferences preferences;
+
+
+    // METHODS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        this.usernameEditText = findViewById(R.id.usernameEditText);
-        this.passwordEditText = findViewById(R.id.passwordEditText);
-
-        Log.i(LOG_TAG, "onCreate");
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        this.usernameEditText = findViewById(R.id.usernameEditText);
+        this.passwordEditText = findViewById(R.id.passwordEditText);
+
+        preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+
+        Log.i(LOG_TAG, "onCreate");
     }
 
-    // ACTIONS
     public void login(View view) {
         String userName = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
         Log.i(LOG_TAG, "Bejelentkezett: " + userName + ", jelszó: " + password);
+
+        // TODO: Bejelentkezés funkció
     }
 
     public void register(View view) {
@@ -81,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("username", usernameEditText.getText().toString());
+        editor.putString("password", passwordEditText.getText().toString());
+        editor.apply();
+
         Log.i(LOG_TAG, "onPause");
     }
 
