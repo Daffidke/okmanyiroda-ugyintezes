@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hintColorLight">#78909C</color>
+    <color name="primaryAppColor">#0E7E82</color>
+    <color name="secondaryAppColor">#40514E</color>
+    <color name="backgroundAppColor">#E4F9F5</color>
 </resources>

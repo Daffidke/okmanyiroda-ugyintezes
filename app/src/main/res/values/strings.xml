@@ -11,4 +11,11 @@
     <string name="email_address_text">E-mail cím</string>
     <string name="address_text">Lakcím</string>
     <string name="cancel_text">Vissza</string>
+    <string name="reservation_title">Foglaljon időpontot a következő ügyek intézésére</string>
+    <string name="calendar_photo">Naptár kép</string>
+    <string name="task1">Személyi igazolvány cseréje, pótlása</string>
+    <string name="task2">Vezetői engedély cseréje, pótlása</string>
+    <string name="task3">Forgalmi engedély megújítása</string>
+    <string name="task4">Lakcímváltozás bejelentése</string>
+    <string name="task5">Útlevél kiadása, pótlása</string>
 </resources>

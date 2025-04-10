@@ -1,5 +1,6 @@
 package com.example.okmanyirodaugyintezes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     // CONSTS
     private static final String LOG_TAG = RegisterActivity.class.getName();
     private static final String PREF_KEY = Objects.requireNonNull(RegisterActivity.class.getPackage()).toString();
+    private static final int SECRET_KEY = 76;
 
     // FIELDS
     EditText fullNameEditText;
@@ -84,10 +86,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         Log.i(LOG_TAG, "Regisztrált: " + fullName + ", felhasználóneve: " + username + ", e-mail: " + email);
         // TODO: Regisztrációs funkció
+
+        goToMainPage();
     }
 
     public void cancel(View view){
         finish();
+    }
+
+    private void goToMainPage(/* registered user */) {
+        Intent intent = new Intent(this, ReservationActivity.class);
+        intent.putExtra("SECRET_KEY", SECRET_KEY);
+        startActivity(intent);
     }
 
     // OVERRIDES

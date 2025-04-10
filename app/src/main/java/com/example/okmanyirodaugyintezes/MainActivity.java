@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     // CONSTS
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String PREF_KEY = Objects.requireNonNull(MainActivity.class.getPackage()).toString();
-    private static final int SECRET_KEY = 99;
+    private static final int SECRET_KEY = 76;
 
 
     // FIELDS
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i(LOG_TAG, "Bejelentkezett: " + userName + ", jelszó: " + password);
 
         // TODO: Bejelentkezés funkció
+
+        goToMainPage();
     }
 
     public void register(View view) {
@@ -66,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void goToMainPage(/* registered user */){
+        Intent intent = new Intent(this, ReservationActivity.class);
+        intent.putExtra("SECRET_KEY", SECRET_KEY);
+        startActivity(intent);
+    }
 
     // OVERRIDES
 
