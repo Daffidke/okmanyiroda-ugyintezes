@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Okmányiroda Ügyintézés</string>
+    <string name="app_name">Okmányirodai Ügyintéző Felület</string>
+    <string name="login_text">Bejelentkezés</string>
+    <string name="username_text">Felhasználónév</string>
+    <string name="password_text">Jelszó</string>
+    <string name="register_text">Regisztráció</string>
+    <string name="not_registered_text">Nincs még fiókja?</string>
 </resources>
