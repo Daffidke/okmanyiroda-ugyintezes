@@ -6,6 +6,6 @@
     <dimen name="small_text_size">15sp</dimen>
     <dimen name="normal_text_size">19sp</dimen>
     <dimen name="min_height">48dp</dimen>
-    <dimen name="login_field_margin">350dp</dimen>
+    <dimen name="login_field_margin">280dp</dimen>
     <dimen name="login_button_margin">320dp</dimen>
 </resources>

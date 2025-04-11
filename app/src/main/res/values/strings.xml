@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Okmányirodai Ügyintéző Felület</string>
     <string name="login_text">Bejelentkezés</string>
-    <string name="username_text">Felhasználónév</string>
     <string name="password_text">Jelszó</string>
     <string name="register_text">Regisztráció</string>
     <string name="not_registered_text">Nincs még fiókja?</string>
@@ -18,4 +17,5 @@
     <string name="task3">Forgalmi engedély megújítása</string>
     <string name="task4">Lakcímváltozás bejelentése</string>
     <string name="task5">Útlevél kiadása, pótlása</string>
+    <string name="input_info_text">Adja meg az adatait</string>
 </resources>

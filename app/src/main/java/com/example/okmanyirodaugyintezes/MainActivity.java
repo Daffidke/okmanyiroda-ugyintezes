@@ -6,12 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
@@ -22,12 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private static final int SECRET_KEY = 76;
 
 
-    // FIELDS
-    EditText usernameEditText;
-    EditText passwordEditText;
-
-    // SAVED FIELDS - for saving the typed in username and password
+    // GLOBAL VARIABLES
+    private EditText emailEditText;
+    private EditText passwordEditText;
     private SharedPreferences preferences;
+    private FirebaseAuth Auth;
 
 
     // METHODS
@@ -36,30 +42,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        this.usernameEditText = findViewById(R.id.usernameEditText);
+        // prepare for saving variables
+        preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+        this.emailEditText = findViewById(R.id.emailEditText);
         this.passwordEditText = findViewById(R.id.passwordEditText);
 
-        preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+        // prepare for authentication
+        Auth = FirebaseAuth.getInstance();
 
         Log.i(LOG_TAG, "onCreate");
     }
 
     public void login(View view) {
-        String userName = usernameEditText.getText().toString();
+        String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        Log.i(LOG_TAG, "Bejelentkezett: " + userName + ", jelszó: " + password);
+        // validity check
+        boolean checks = true;
+        if (email.isEmpty()) {
+            emailEditText.setError("Töltsd ki ezt a mezőt");
+            Log.e(LOG_TAG, "Kitöltetlen e-mail mező!");
+            checks = false;
+        }
+        if (password.isEmpty()) {
+            passwordEditText.setError("Töltsd ki ezt a mezőt");
+            Log.e(LOG_TAG, "Kitöltetlen jelszó mező!");
+            checks = false;
+        }
 
-        // TODO: Bejelentkezés funkció
-
-        goToMainPage();
+        // LOG IN WITH FIREBASE
+        if (checks) {
+            Auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Log.d(LOG_TAG, "Sikeres bejelentkezés");
+                        goToMainPage();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Sikertelen bejelentkezés", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
     }
 
     public void register(View view) {
@@ -68,14 +98,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToMainPage(/* registered user */){
+    private void goToMainPage() {
         Intent intent = new Intent(this, ReservationActivity.class);
-        intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
     }
 
-    // OVERRIDES
 
+    // OVERRIDES
     @Override
     protected void onStop() {
         super.onStop();
@@ -99,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("username", usernameEditText.getText().toString());
+        editor.putString("email", emailEditText.getText().toString());
         editor.putString("password", passwordEditText.getText().toString());
         editor.apply();
 

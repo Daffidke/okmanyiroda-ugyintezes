@@ -36,12 +36,12 @@
     </FrameLayout>
 
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/emailEditText"
         android:layout_width="@dimen/login_field_margin"
         android:layout_height="wrap_content"
-        android:autofillHints="username"
-        android:hint="@string/username_text"
-        android:inputType="textPersonName"
+        android:autofillHints="emailAddress"
+        android:hint="@string/email_address_text"
+        android:inputType="textEmailAddress"
         android:minHeight="@dimen/min_height"
         android:textColor="@color/secondaryAppColor"
         android:textColorHint="@color/hintColorLight"
@@ -66,7 +66,7 @@
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
         app:layout_constraintVertical_bias="0.454" />
 
     <Button
