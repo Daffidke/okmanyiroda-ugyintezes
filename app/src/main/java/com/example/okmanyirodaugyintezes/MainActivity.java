@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // make the status bar the same color as the design
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primaryAppColor));
 
         // prepare for saving variables
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
@@ -91,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     // EditText Invalid Input Fade-In Animation
     private void showErrorWithFadeIn(EditText editText) {
         Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.error_icon);
-        if(errorIcon != null){
+        if (errorIcon != null) {
             errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());
         }
         editText.setError("Töltsd ki ezt a mezőt", errorIcon);

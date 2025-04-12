@@ -2,9 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="hintColorLight">#558C8E</color>
+    <color name="hintColorLight">#4C7476</color>
     <color name="primaryAppColor">#0E7E82</color>
-    <color name="secondaryAppColor">#40514E</color>
-    <color name="backgroundAppColor">#E4F9F5</color>
+    <color name="secondaryAppColor">#3A4945</color>
+    <color name="backgroundAppColor">#E9FBF7</color>
     <color name="warning">#CC3300</color>
 </resources>

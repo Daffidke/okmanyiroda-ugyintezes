@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.content.SharedPreferences;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -48,6 +50,12 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
+        // make the status bar the same color as the design
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primaryAppColor));
+
         // protection for not intended usage
         int secret_key = getIntent().getIntExtra("SECRET_KEY", 0);
         if (secret_key != 76) {
@@ -89,32 +97,32 @@ public class RegisterActivity extends AppCompatActivity {
         // validity checks
         boolean check = true;
         if (!password.equals(passwordConfirm)) {
-            showErrorWithFadeIn(passwordEditText,"A két megadott jelszó nem egyezik meg");
-            showErrorWithFadeIn(passwordConfirmEditText,"A két megadott jelszó nem egyezik meg");
+            showErrorWithFadeIn(passwordEditText, "A két megadott jelszó nem egyezik meg");
+            showErrorWithFadeIn(passwordConfirmEditText, "A két megadott jelszó nem egyezik meg");
             check = false;
         }
         if (!isNameValid(fullName)) {
-            showErrorWithFadeIn(fullNameEditText,"Adja meg a teljes nevét");
+            showErrorWithFadeIn(fullNameEditText, "Adja meg a teljes nevét");
             check = false;
         }
         if (!isEmailValid(email)) {
-            showErrorWithFadeIn(emailEditText,"Adjon meg egy létező E-mail címet");
+            showErrorWithFadeIn(emailEditText, "Adjon meg egy létező E-mail címet");
             check = false;
         }
         if (!isPhoneValid(phone)) {
-            showErrorWithFadeIn(phoneEditText,"Adjon meg egy létező telefonszámot");
+            showErrorWithFadeIn(phoneEditText, "Adjon meg egy létező telefonszámot");
             check = false;
         }
         if (address.isEmpty()) {
-            showErrorWithFadeIn(addressEditText,"Adjon meg egy létező lakcímet");
+            showErrorWithFadeIn(addressEditText, "Adjon meg egy létező lakcímet");
             check = false;
         }
-        if(passwordConfirm.isEmpty()){
+        if (passwordConfirm.isEmpty()) {
             showErrorWithFadeIn(passwordConfirmEditText, "Erősítse meg a jelszavát!");
             check = false;
         }
         if (password.isEmpty() || password.length() < 6) {
-            showErrorWithFadeIn(passwordEditText,"Adjon meg egy 6 karakternél hosszabb jelszót");
+            showErrorWithFadeIn(passwordEditText, "Adjon meg egy 6 karakternél hosszabb jelszót");
             check = false;
         }
 
@@ -161,7 +169,7 @@ public class RegisterActivity extends AppCompatActivity {
     // EditText Invalid Input Fade-In Animation
     private void showErrorWithFadeIn(EditText editText, String errorMsg) {
         Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.error_icon);
-        if(errorIcon != null){
+        if (errorIcon != null) {
             errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());
         }
         editText.setError(errorMsg, errorIcon);
