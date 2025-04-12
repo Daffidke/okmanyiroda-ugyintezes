@@ -1,23 +1,22 @@
 package com.example.okmanyirodaugyintezes;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.content.SharedPreferences;
+import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -87,49 +86,47 @@ public class RegisterActivity extends AppCompatActivity {
         String address = addressEditText.getText().toString();
         // TODO: save user details to database
 
-        // password check
-        if (!password.equals(passwordConfirm)) {
-            passwordEditText.setError("A két megadott jelszó nem egyezik meg");
-            passwordConfirmEditText.setError("A két megadott jelszó nem egyezik meg");
-            Log.e(LOG_TAG, "A két megadott jelszó nem egyezik meg.");
-            return;
-        }
-
         // validity checks
         boolean check = true;
+        if (!password.equals(passwordConfirm)) {
+            showErrorWithFadeIn(passwordEditText,"A két megadott jelszó nem egyezik meg");
+            showErrorWithFadeIn(passwordConfirmEditText,"A két megadott jelszó nem egyezik meg");
+            check = false;
+        }
         if (!isNameValid(fullName)) {
-            fullNameEditText.setError("Adja meg a teljes nevét");
+            showErrorWithFadeIn(fullNameEditText,"Adja meg a teljes nevét");
             check = false;
         }
         if (!isEmailValid(email)) {
-            emailEditText.setError("Adjon meg egy létező E-mail címet");
+            showErrorWithFadeIn(emailEditText,"Adjon meg egy létező E-mail címet");
             check = false;
         }
         if (!isPhoneValid(phone)) {
-            phoneEditText.setError("Adjon meg egy létező telefonszámot");
+            showErrorWithFadeIn(phoneEditText,"Adjon meg egy létező telefonszámot");
             check = false;
         }
         if (address.isEmpty()) {
-            addressEditText.setError("Adjon meg egy létező lakcímet");
+            showErrorWithFadeIn(addressEditText,"Adjon meg egy létező lakcímet");
+            check = false;
+        }
+        if(passwordConfirm.isEmpty()){
+            showErrorWithFadeIn(passwordConfirmEditText, "Erősítse meg a jelszavát!");
             check = false;
         }
         if (password.isEmpty() || password.length() < 6) {
-            passwordEditText.setError("Adjon meg egy 6 karakternél hosszabb jelszót");
+            showErrorWithFadeIn(passwordEditText,"Adjon meg egy 6 karakternél hosszabb jelszót");
             check = false;
         }
 
         // REGISTERING TO FIREBASE
         if (check) {
-            Auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Log.d(LOG_TAG, "Felhasználó sikeresen létrehozva.");
-                        goToMainPage();
-                    } else {
-                        Log.d(LOG_TAG, "A felhasználó létrehozása sikertelen: ", task.getException());
-                        Toast.makeText(RegisterActivity.this, "A felhasználó létrehozása sikertelen: ", Toast.LENGTH_LONG).show();
-                    }
+            Auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    Log.d(LOG_TAG, "Felhasználó sikeresen létrehozva.");
+                    goToMainPage();
+                } else {
+                    Log.d(LOG_TAG, "A felhasználó létrehozása sikertelen: ", task.getException());
+                    Toast.makeText(RegisterActivity.this, "A felhasználó létrehozása sikertelen", Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -140,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goToMainPage(/* registered user */) {
+    private void goToMainPage() {
         Intent intent = new Intent(this, ReservationActivity.class);
         startActivity(intent);
     }
@@ -159,6 +156,21 @@ public class RegisterActivity extends AppCompatActivity {
     boolean isNameValid(String name) {
         return name != null && !name.trim().isEmpty() &&
                 name.matches("^(?=.*\\s)[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű\\s'-]{2,50}$");
+    }
+
+    // EditText Invalid Input Fade-In Animation
+    private void showErrorWithFadeIn(EditText editText, String errorMsg) {
+        Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.error_icon);
+        if(errorIcon != null){
+            errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());
+        }
+        editText.setError(errorMsg, errorIcon);
+
+        AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
+        fadeIn.setDuration(500);
+        fadeIn.setFillAfter(true);
+
+        editText.startAnimation(fadeIn);
     }
 
     // OVERRIDES

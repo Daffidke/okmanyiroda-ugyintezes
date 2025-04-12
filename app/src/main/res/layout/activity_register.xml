@@ -142,7 +142,7 @@
                 android:backgroundTint="@color/primaryAppColor"
                 android:onClick="register"
                 android:text="@string/register_text"
-                android:textColor="@color/white"
+                android:textColor="@color/backgroundAppColor"
                 android:textSize="@dimen/normal_text_size" />
         </LinearLayout>
 

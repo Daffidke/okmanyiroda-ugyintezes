@@ -1,7 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.OkmányirodaÜgyintézés" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/primaryAppColor</item>
+        <item name="colorSecondary">@color/secondaryAppColor</item>
+        <item name="hintTextColor">@color/hintColorLight</item>
+        <item name="background">@color/primaryAppColor</item>
+        <item name="errorTextColor">@color/warning</item>
     </style>
 </resources>

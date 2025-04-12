@@ -2,22 +2,21 @@ package com.example.okmanyirodaugyintezes;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -66,30 +65,42 @@ public class MainActivity extends AppCompatActivity {
         // validity check
         boolean checks = true;
         if (email.isEmpty()) {
-            emailEditText.setError("Töltsd ki ezt a mezőt");
+            showErrorWithFadeIn(emailEditText);
             Log.e(LOG_TAG, "Kitöltetlen e-mail mező!");
             checks = false;
         }
         if (password.isEmpty()) {
-            passwordEditText.setError("Töltsd ki ezt a mezőt");
+            showErrorWithFadeIn(passwordEditText);
             Log.e(LOG_TAG, "Kitöltetlen jelszó mező!");
             checks = false;
         }
 
         // LOG IN WITH FIREBASE
         if (checks) {
-            Auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Log.d(LOG_TAG, "Sikeres bejelentkezés");
-                        goToMainPage();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Sikertelen bejelentkezés", Toast.LENGTH_LONG).show();
-                    }
+            Auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    Log.d(LOG_TAG, "Sikeres bejelentkezés");
+                    goToMainPage();
+                } else {
+                    Toast.makeText(MainActivity.this, "Sikertelen bejelentkezés", Toast.LENGTH_LONG).show();
                 }
             });
         }
+    }
+
+    // EditText Invalid Input Fade-In Animation
+    private void showErrorWithFadeIn(EditText editText) {
+        Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.error_icon);
+        if(errorIcon != null){
+            errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());
+        }
+        editText.setError("Töltsd ki ezt a mezőt", errorIcon);
+
+        AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
+        fadeIn.setDuration(500);
+        fadeIn.setFillAfter(true);
+
+        editText.startAnimation(fadeIn);
     }
 
     public void register(View view) {
