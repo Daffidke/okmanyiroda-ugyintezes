@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="hintColorLight">#4C7476</color>
-    <color name="primaryAppColor">#0E7E82</color>
-    <color name="secondaryAppColor">#3A4945</color>
-    <color name="backgroundAppColor">#E9FBF7</color>
-    <color name="warning">#CC3300</color>
+    <color name="hintColorDark">#6DAFB3</color>
+    <color name="primaryAppColorLight">#0E7E82</color>
+    <color name="primaryAppColorDark">#4CBCBF</color>
+    <color name="secondaryAppColorLight">#3A4945</color>
+    <color name="secondaryAppColorDark">#C4FDF9</color>
+    <color name="backgroundAppColorLight">#E9FBF7</color>
+    <color name="backgroundAppColorDark">#2E3A37</color>
+    <color name="warningColor">#CC3300</color>
 </resources>

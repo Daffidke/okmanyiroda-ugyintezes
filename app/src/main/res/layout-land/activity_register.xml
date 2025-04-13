@@ -6,141 +6,194 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <LinearLayout
-        android:id="@+id/root"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/backgroundAppColor"
-        android:orientation="vertical"
-        android:scrollbars="vertical"
-        tools:context=".RegisterActivity">
+        android:background="?attr/colorPrimary">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/primaryAppColor"
-            android:gravity="bottom|center"
-            android:paddingTop="@dimen/basic_margin"
-            android:paddingBottom="@dimen/small_margin"
             android:layout_marginBottom="@dimen/small_margin"
             android:text="@string/input_info_text"
-            android:textColor="@color/backgroundAppColor"
+            android:textColor="?attr/backgroundColor"
             android:textSize="@dimen/title_text_size"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/root"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <LinearLayout
+            android:id="@+id/root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-        <EditText
-            android:id="@+id/fullNameEditText"
-            android:layout_width="@dimen/login_field_margin"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/basic_margin"
-            android:autofillHints="name"
-            android:hint="@string/full_name_text"
-            android:inputType="textPersonName"
-            android:minHeight="@dimen/min_height"
-            android:backgroundTint="@color/primaryAppColor"
-            android:textColor="@color/secondaryAppColor"
-            android:textColorHint="@color/hintColorLight"
-            android:textSize="@dimen/normal_text_size" />
+            android:background="?attr/backgroundColor"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/basic_margin"
+            android:paddingBottom="@dimen/basic_margin"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".RegisterActivity">
 
-        <EditText
-            android:id="@+id/emailEditText"
-            android:layout_width="@dimen/login_field_margin"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/basic_margin"
-            android:autofillHints="emailAddress"
-            android:hint="@string/email_address_text"
-            android:inputType="textEmailAddress"
-            android:minHeight="@dimen/min_height"
-            android:backgroundTint="@color/primaryAppColor"
-            android:textColor="@color/secondaryAppColor"
-            android:textColorHint="@color/hintColorLight"
-            android:textSize="@dimen/normal_text_size" />
+            <LinearLayout
+                android:id="@+id/row1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/row2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/root">
+
+                <EditText
+                    android:id="@+id/fullNameEditText"
+                    android:layout_width="@dimen/login_field_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/basic_margin"
+                    android:autofillHints="name"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:hint="@string/full_name_text"
+                    android:inputType="textPersonName"
+                    android:minHeight="@dimen/min_height"
+                    android:textColor="?attr/colorSecondary"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textSize="@dimen/normal_text_size" />
+
+                <EditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="@dimen/login_field_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/basic_margin"
+                    android:autofillHints="emailAddress"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:hint="@string/email_address_text"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="@dimen/min_height"
+                    android:textColor="?attr/colorSecondary"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textSize="@dimen/normal_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/row3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/row1">
+
+                <EditText
+                    android:id="@+id/phoneNumberEditText"
+                    android:layout_width="@dimen/login_field_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/basic_margin"
+                    android:autofillHints="phone"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:hint="@string/phone_number_text"
+                    android:inputType="phone"
+                    android:minHeight="@dimen/min_height"
+                    android:textColor="?attr/colorSecondary"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textSize="@dimen/normal_text_size" />
+
+                <EditText
+                    android:id="@+id/addressEditText"
+                    android:layout_width="@dimen/login_field_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/basic_margin"
+                    android:autofillHints="username"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:hint="@string/address_text"
+                    android:inputType="textPostalAddress"
+                    android:minHeight="@dimen/min_height"
+                    android:textColor="?attr/colorSecondary"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textSize="@dimen/normal_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/row3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/root"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/row2">
+
+                <EditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="@dimen/login_field_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/basic_margin"
+                    android:autofillHints="password"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:hint="@string/password_text"
+                    android:inputType="textPassword"
+                    android:minHeight="@dimen/min_height"
+                    android:textColor="?attr/colorSecondary"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textSize="@dimen/normal_text_size" />
+
+                <EditText
+                    android:id="@+id/passwordConfirmEditText"
+                    android:layout_width="@dimen/login_field_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/basic_margin"
+                    android:autofillHints="password"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:hint="@string/password_confirm_text"
+                    android:inputType="textPassword"
+                    android:minHeight="@dimen/min_height"
+                    android:textColor="?attr/colorSecondary"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textSize="@dimen/normal_text_size" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/phoneNumberEditText"
-            android:layout_width="@dimen/login_field_margin"
+        <ProgressBar
+            android:id="@+id/registerProgressBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/basic_margin"
-            android:autofillHints="phone"
-            android:hint="@string/phone_number_text"
-            android:inputType="phone"
-            android:minHeight="@dimen/min_height"
-            android:backgroundTint="@color/primaryAppColor"
-            android:textColor="@color/secondaryAppColor"
-            android:textColorHint="@color/hintColorLight"
-            android:textSize="@dimen/normal_text_size" />
+            app:layout_constraintTop_toBottomOf="@id/root"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/horizontalButtons"
+            android:indeterminate="true" />
 
-        <EditText
-            android:id="@+id/addressEditText"
-            android:layout_width="@dimen/login_field_margin"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/basic_margin"
-            android:autofillHints="username"
-            android:hint="@string/address_text"
-            android:inputType="textPostalAddress"
-            android:minHeight="@dimen/min_height"
-            android:backgroundTint="@color/primaryAppColor"
-            android:textColor="@color/secondaryAppColor"
-            android:textColorHint="@color/hintColorLight"
-            android:textSize="@dimen/normal_text_size" />
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="@dimen/login_field_margin"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/basic_margin"
-            android:autofillHints="password"
-            android:hint="@string/password_text"
-            android:inputType="textPassword"
-            android:minHeight="@dimen/min_height"
-            android:backgroundTint="@color/primaryAppColor"
-            android:textColor="@color/secondaryAppColor"
-            android:textColorHint="@color/hintColorLight"
-            android:textSize="@dimen/normal_text_size" />
-
-        <EditText
-            android:id="@+id/passwordConfirmEditText"
-            android:layout_width="@dimen/login_field_margin"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/basic_margin"
-            android:autofillHints="password"
-            android:hint="@string/password_confirm_text"
-            android:inputType="textPassword"
-            android:minHeight="@dimen/min_height"
-            android:backgroundTint="@color/primaryAppColor"
-            android:textColor="@color/secondaryAppColor"
-            android:textColorHint="@color/hintColorLight"
-            android:textSize="@dimen/normal_text_size" />
-    </LinearLayout>
         <LinearLayout
             android:id="@+id/horizontalButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:gravity="center">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/root">
 
             <ImageView
                 android:id="@+id/cancelButton"
@@ -155,13 +208,14 @@
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/small_margin"
-                android:backgroundTint="@color/primaryAppColor"
+                android:layout_marginStart="@dimen/small_margin"
+                android:backgroundTint="?attr/backgroundColor"
                 android:onClick="register"
                 android:text="@string/register_text"
-                android:textColor="@color/backgroundAppColor"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="@dimen/normal_text_size" />
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

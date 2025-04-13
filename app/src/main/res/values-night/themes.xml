@@ -1,5 +1,10 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.OkmányirodaÜgyintézés" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="hintTextColor">@color/hintColorDark</item>
+        <item name="colorPrimary">@color/primaryAppColorDark</item>
+        <item name="colorSecondary">@color/secondaryAppColorDark</item>
+        <item name="backgroundColor">@color/backgroundAppColorDark</item>
+        <item name="errorTextColor">@color/warningColor</item>
     </style>
 </resources>

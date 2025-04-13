@@ -1,15 +1,20 @@
 package com.example.okmanyirodaugyintezes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -33,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
     // GLOBAL VARIABLES
     private EditText emailEditText;
     private EditText passwordEditText;
+    private Button loginButton;
     private SharedPreferences preferences;
     private FirebaseAuth Auth;
+    private ProgressBar loginProgressBar;
 
 
     // METHODS
@@ -53,12 +60,14 @@ public class MainActivity extends AppCompatActivity {
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primaryAppColor));
+        window.setStatusBarColor(getThemeColor(this, androidx.appcompat.R.attr.colorPrimary));
 
-        // prepare for saving variables
+        // init
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
         this.emailEditText = findViewById(R.id.emailEditText);
         this.passwordEditText = findViewById(R.id.passwordEditText);
+        this.loginProgressBar = findViewById(R.id.loginProgressBar);
+        this.loginButton = findViewById(R.id.loginButton);
 
         // prepare for authentication
         Auth = FirebaseAuth.getInstance();
@@ -85,11 +94,21 @@ public class MainActivity extends AppCompatActivity {
 
         // LOG IN WITH FIREBASE
         if (checks) {
+            loginProgressBar.setVisibility(View.VISIBLE);
+            loginButton.setEnabled(false);
+
             Auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+                loginProgressBar.setVisibility(View.GONE);
+                loginButton.setEnabled(true);
+
                 if (task.isSuccessful()) {
                     Log.d(LOG_TAG, "Sikeres bejelentkezés");
+                    Toast.makeText(MainActivity.this, "Sikeres bejelentkezés", Toast.LENGTH_LONG).show();
                     goToMainPage();
                 } else {
+                    loginProgressBar.setVisibility(View.GONE);
+                    loginButton.setEnabled(true);
+                    Log.e(LOG_TAG, "Sikertelen bejelentkezés");
                     Toast.makeText(MainActivity.this, "Sikertelen bejelentkezés", Toast.LENGTH_LONG).show();
                 }
             });
@@ -122,6 +141,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Getting theme color
+    public static int getThemeColor(Context context, int attrResId) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(attrResId, typedValue, true);
+        return typedValue.data;
+    }
+
 
     // OVERRIDES
     @Override
@@ -146,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
+        // pass the saved variables to register activity
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("email", emailEditText.getText().toString());
         editor.putString("password", passwordEditText.getText().toString());

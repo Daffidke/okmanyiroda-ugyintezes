@@ -1,11 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.OkmányirodaÜgyintézés" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/primaryAppColor</item>
-        <item name="colorSecondary">@color/secondaryAppColor</item>
         <item name="hintTextColor">@color/hintColorLight</item>
-        <item name="background">@color/backgroundAppColor</item>
-        <item name="errorTextColor">@color/warning</item>
+        <item name="colorPrimary">@color/primaryAppColorLight</item>
+        <item name="colorSecondary">@color/secondaryAppColorLight</item>
+        <item name="backgroundColor">@color/backgroundAppColorLight</item>
+        <item name="errorTextColor">@color/warningColor</item>
     </style>
 
     <style name="Theme.OkmányirodaÜgyintézés" parent="Base.Theme.OkmányirodaÜgyintézés" />

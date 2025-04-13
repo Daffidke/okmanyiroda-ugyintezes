@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ReservationActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class ReservationActivity extends AppCompatActivity {
     private TextView fullNameTextView;
     private FirebaseUser user;
     private FirebaseAuth Auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,11 @@ public class ReservationActivity extends AppCompatActivity {
 
         // VALIDATING USER
         Auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user != null) {
-            fullNameTextView.setText(user.getEmail());
+        if (user != null) {
+            fetchUserData(user.getUid());
             Log.d(LOG_TAG, "Sikeres bejelentkezés");
         } else {
             Log.d(LOG_TAG, "Sikertelen bejelentkezés");
@@ -59,12 +63,29 @@ public class ReservationActivity extends AppCompatActivity {
         animator.start();
     }
 
+    // GET USER DATA FROM FIRESTORE
+    private void fetchUserData(String userId) {
+        db.collection("users").document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String fullName = documentSnapshot.getString("fullName");
+                        fullNameTextView.setText(fullName);
+                        Log.d(LOG_TAG, "Adatok lekérve");
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Nem sikerült lekérni az adatokat: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e(LOG_TAG, "Nem sikerült lekérni az adatokat: " + e.getMessage());
+                });
+    }
 
     // LOG OUT
     public void signOut(View view) {
         try {
             Auth.signOut();
-            Log.d(LOG_TAG, "Felhasználó sikeresen kijelentkezett.");
+            Log.d(LOG_TAG, "Sikeres kijelentkezés.");
+            Toast.makeText(this, "Sikeres kijelentkezés", Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(ReservationActivity.this, MainActivity.class));
             finish();

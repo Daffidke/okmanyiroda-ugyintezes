@@ -1,15 +1,20 @@
 package com.example.okmanyirodaugyintezes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.content.SharedPreferences;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,7 +25,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -36,7 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText addressEditText;
     private EditText passwordEditText;
     private EditText passwordConfirmEditText;
+    private Button registerButton;
+    private ProgressBar registerProgressBar;
     private FirebaseAuth Auth;
+    private FirebaseFirestore db;
 
     // METHODS
     @Override
@@ -54,9 +66,9 @@ public class RegisterActivity extends AppCompatActivity {
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.primaryAppColor));
+        window.setStatusBarColor(getThemeColor(this, androidx.appcompat.R.attr.colorPrimary));
 
-        // protection for not intended usage
+        // protection for non-intended usage
         int secret_key = getIntent().getIntExtra("SECRET_KEY", 0);
         if (secret_key != 76) {
             finish();
@@ -64,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // prepare for authentication
         Auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // handling inputs
         this.fullNameEditText = findViewById(R.id.fullNameEditText);
@@ -72,6 +85,8 @@ public class RegisterActivity extends AppCompatActivity {
         this.addressEditText = findViewById(R.id.addressEditText);
         this.passwordEditText = findViewById(R.id.passwordEditText);
         this.passwordConfirmEditText = findViewById(R.id.passwordConfirmEditText);
+        this.registerProgressBar = findViewById(R.id.registerProgressBar);
+        this.registerButton = findViewById(R.id.registerButton);
 
         // SAVED FIELDS - without password confirmation
         SharedPreferences preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
@@ -86,55 +101,89 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void register(View view) {
 
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String passwordConfirm = passwordConfirmEditText.getText().toString();
-        String fullName = fullNameEditText.getText().toString();
-        String phone = phoneEditText.getText().toString();
-        String address = addressEditText.getText().toString();
-        // TODO: save user details to database
+        String email = emailEditText.getText().toString().trim().toLowerCase();
+        String password = passwordEditText.getText().toString().trim();
+        String passwordConfirm = passwordConfirmEditText.getText().toString().trim();
+        String fullName = fullNameEditText.getText().toString().trim().toLowerCase();
+        String phone = phoneEditText.getText().toString().trim();
+        String address = addressEditText.getText().toString().trim().toLowerCase();
 
         // validity checks
         boolean check = true;
         if (!password.equals(passwordConfirm)) {
             showErrorWithFadeIn(passwordEditText, "A két megadott jelszó nem egyezik meg");
             showErrorWithFadeIn(passwordConfirmEditText, "A két megadott jelszó nem egyezik meg");
+            Log.e(LOG_TAG, "A két jelszó nem egyezik meg.");
             check = false;
         }
         if (!isNameValid(fullName)) {
-            showErrorWithFadeIn(fullNameEditText, "Adja meg a teljes nevét");
+            showErrorWithFadeIn(fullNameEditText, "Adja meg helyesen a teljes nevét (pl. Nagy Sándor)");
+            Log.e(LOG_TAG, "Hibás / hiányzó név");
             check = false;
         }
         if (!isEmailValid(email)) {
-            showErrorWithFadeIn(emailEditText, "Adjon meg egy létező E-mail címet");
+            showErrorWithFadeIn(emailEditText, "Adja meg helyesen az e-mail címét (pl. example@example.com)");
+            Log.e(LOG_TAG, "Hibás / hiányzó email");
             check = false;
         }
         if (!isPhoneValid(phone)) {
-            showErrorWithFadeIn(phoneEditText, "Adjon meg egy létező telefonszámot");
+            showErrorWithFadeIn(phoneEditText, "Adja meg helyesen a telefonszámát (pl. 06207365539)");
+            Log.e(LOG_TAG, "Hibás / hiányzó telefonszám");
             check = false;
         }
         if (address.isEmpty()) {
-            showErrorWithFadeIn(addressEditText, "Adjon meg egy létező lakcímet");
+            showErrorWithFadeIn(addressEditText, "Adja meg a lakcímét");
+            Log.e(LOG_TAG, "Hiányzó lakcím");
             check = false;
         }
         if (passwordConfirm.isEmpty()) {
             showErrorWithFadeIn(passwordConfirmEditText, "Erősítse meg a jelszavát!");
+            Log.e(LOG_TAG, "Hiányzó jelszó megerősítés");
             check = false;
         }
         if (password.isEmpty() || password.length() < 6) {
             showErrorWithFadeIn(passwordEditText, "Adjon meg egy 6 karakternél hosszabb jelszót");
+            Log.e(LOG_TAG, "Hiányzó / helytelen jelszó");
             check = false;
         }
 
-        // REGISTERING TO FIREBASE
+        // REGISTERING TO FIREBASE AND FIRESTORE
         if (check) {
+            registerProgressBar.setVisibility(View.VISIBLE);
+            registerButton.setEnabled(false);
+
             Auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
-                    Log.d(LOG_TAG, "Felhasználó sikeresen létrehozva.");
-                    goToMainPage();
+                    FirebaseUser user = Auth.getCurrentUser();
+                    if (user != null) {
+                        String uid = user.getUid();
+                        Map<String, Object> userData = new HashMap<>();
+                        userData.put("fullName", reformatString(fullName));
+                        userData.put("address", reformatString(address));
+                        userData.put("phone", phone);
+
+                        db.collection("users").document(uid)
+                                .set(userData)
+                                .addOnSuccessListener(aVoid -> {
+                                    registerProgressBar.setVisibility(View.GONE);
+                                    registerButton.setEnabled(true);
+                                    Log.d(LOG_TAG, "Felhasználó sikeresen létrehozva.");
+                                    Toast.makeText(RegisterActivity.this, "Sikeres regisztráció", Toast.LENGTH_SHORT).show();
+                                    goToMainPage();
+                                })
+                                .addOnFailureListener(e -> {
+                                    registerProgressBar.setVisibility(View.GONE);
+                                    registerButton.setEnabled(true);
+                                    Log.e(LOG_TAG, "Felhasználó létrehozása sikertelen.", task.getException());
+                                    Toast.makeText(RegisterActivity.this, "Sikertelen regisztráció", Toast.LENGTH_SHORT).show();
+                                    user.delete();
+                                });
+                    }
                 } else {
+                    registerProgressBar.setVisibility(View.GONE);
+                    registerButton.setEnabled(true);
                     Log.d(LOG_TAG, "A felhasználó létrehozása sikertelen: ", task.getException());
-                    Toast.makeText(RegisterActivity.this, "A felhasználó létrehozása sikertelen", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Sikertelen regisztráció", Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -150,7 +199,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // VALIDITY CHECK METHODS
+    // INPUT VALIDITY CHECK METHODS
     boolean isEmailValid(String email) {
         return email != null && !email.isEmpty() &&
                 email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
@@ -164,6 +213,17 @@ public class RegisterActivity extends AppCompatActivity {
     boolean isNameValid(String name) {
         return name != null && !name.trim().isEmpty() &&
                 name.matches("^(?=.*\\s)[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű\\s'-]{2,50}$");
+    }
+
+    String reformatString(String fullName) {
+        StringBuilder result = new StringBuilder();
+        String[] splitName = fullName.split(" ");
+        for (String name : splitName) {
+            StringBuilder sb = new StringBuilder(name);
+            sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
+            result.append(sb).append(" ");
+        }
+        return result.toString().trim();
     }
 
     // EditText Invalid Input Fade-In Animation
@@ -181,8 +241,15 @@ public class RegisterActivity extends AppCompatActivity {
         editText.startAnimation(fadeIn);
     }
 
-    // OVERRIDES
+    // Getting theme color
+    public static int getThemeColor(Context context, int attrResId) {
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(attrResId, typedValue, true);
+        return typedValue.data;
+    }
 
+    // OVERRIDES
     @Override
     protected void onStop() {
         super.onStop();
