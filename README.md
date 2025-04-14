@@ -1,5 +1,4 @@
 # Okmányirodai ügyintézés időpontfoglaló alkalmazás
-## Hallgató: Bárkányi Dávid **/X28GSU/**
 #### A projekt az SZTE TTIK Mobil alkalmazásfejlesztés nevű kurzusára *[IB470G-1]* készül.
 
 ___
@@ -15,12 +14,13 @@ ___
 
 ___
 
-## 1. Mérföldkő *(2025. április 13. 23:55)*
+## 1. Mérföldkő *(2025. április 13. 23:55) [Leadva]*
 ### Értékelési szempontok:
 * Nincs fordítási- és futtatási hiba
 * Firebase autentikáció
   * Bejelentkezés
   * Regisztráció
+  * Kijelentkezés
 * Helyes beviteli mezők használata
 * ConstraintLayout és még egy másik layout típus használata
 * Reszponzivitás
