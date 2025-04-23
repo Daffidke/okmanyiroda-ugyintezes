@@ -19,4 +19,11 @@
     <string name="task5">Útlevél kiadása, pótlása</string>
     <string name="input_info_text">Adja meg az adatait</string>
     <string name="logout_text">Kijelentkezés</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="userdetails_string">Profiladatok</string>
+    <string name="modify_string">Módosítás</string>
+    <string name="reserve_task_string">Időpont foglalása</string>
+    <string name="task_todo_string">Intézendő ügy</string>
+    <string name="reserve_text">Foglalás</string>
 </resources>

@@ -8,4 +8,5 @@
     <dimen name="min_height">48dp</dimen>
     <dimen name="login_field_margin">280dp</dimen>
     <dimen name="login_button_margin">320dp</dimen>
+    <dimen name="list_width">150dp</dimen>
 </resources>

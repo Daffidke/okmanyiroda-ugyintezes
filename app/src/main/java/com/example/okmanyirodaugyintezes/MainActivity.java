@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToMainPage() {
-        Intent intent = new Intent(this, ReservationActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 

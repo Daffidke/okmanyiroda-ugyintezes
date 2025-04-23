@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,40 +14,46 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class ReservationActivity extends AppCompatActivity {
-
+public class HomeActivity extends AppCompatActivity {
     // CONSTS
-    private static final String LOG_TAG = ReservationActivity.class.getName();
+    private static final String LOG_TAG = HomeActivity.class.getName();
 
     // GLOBAL VARIABLES
-    private TextView fullNameTextView;
+    BottomNavigationView bottomNav;
+    ProgressBar homeProgessBar;
     private FirebaseUser user;
     private FirebaseAuth Auth;
     private FirebaseFirestore db;
+    private UserDetails userDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_reservation);
+        setContentView(R.layout.activity_home);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        this.fullNameTextView = findViewById(R.id.fullNameTextView);
+        homeProgessBar = findViewById(R.id.homeProgressBar);
+        bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnItemSelectedListener(navListener);
 
         // VALIDATING USER
         Auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
 
+        homeProgessBar.setVisibility(View.VISIBLE);
         if (user != null) {
             fetchUserData(user.getUid());
             Log.d(LOG_TAG, "Sikeres bejelentkezés");
@@ -55,12 +61,6 @@ public class ReservationActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Sikertelen bejelentkezés");
             finish();
         }
-
-        // SHAKE ANIMATION ON LOAD
-        ImageView calendarImageView = findViewById(R.id.calendar);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(calendarImageView, "rotation", 0f, 10f, -10f, 5f, -5f, 0f);
-        animator.setDuration(1200);
-        animator.start();
     }
 
     // GET USER DATA FROM FIRESTORE
@@ -70,8 +70,16 @@ public class ReservationActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String fullName = documentSnapshot.getString("fullName");
-                        fullNameTextView.setText(fullName);
+                        String phoneNumber = documentSnapshot.getString("phone");
+                        String postalAddress = documentSnapshot.getString("address");
+                        userDetails = new UserDetails(fullName, phoneNumber, postalAddress);
                         Log.d(LOG_TAG, "Adatok lekérve");
+                        homeProgessBar.setVisibility(View.GONE);
+
+                        // Default fragment
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, ReservationFragment.newInstance(userDetails))
+                                .commit();
                     }
                 })
                 .addOnFailureListener(e -> {
@@ -87,10 +95,31 @@ public class ReservationActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Sikeres kijelentkezés.");
             Toast.makeText(this, "Sikeres kijelentkezés", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(ReservationActivity.this, MainActivity.class));
+            startActivity(new Intent(HomeActivity.this, MainActivity.class));
             finish();
         } catch (Exception e) {
             Log.e(LOG_TAG, "Sikertelen kijelentkezés: " + e.getMessage());
         }
     }
+
+    private final BottomNavigationView.OnItemSelectedListener navListener = item -> {
+        Fragment selectedFragment;
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.nav_reservation) {
+            selectedFragment = ReservationFragment.newInstance(userDetails);
+        } else if (itemId == R.id.nav_booked) {
+            selectedFragment = new BookedFragment();
+        } else if (itemId == R.id.nav_useredit) {
+            selectedFragment = UserEditFragment.newInstance(userDetails);
+        } else {
+            return false;
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, selectedFragment)
+                .commit();
+
+        return true;
+    };
 }
