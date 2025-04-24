@@ -64,161 +64,148 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/row1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
 
             <TextView
                 android:id="@+id/taskTodoTextView"
-                android:layout_width="@dimen/list_width"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/min_height"
                 android:text="@string/task_todo_string"
                 android:textAlignment="viewStart"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="@dimen/normal_text_size" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
             <TextView
                 android:id="@+id/taskTextView"
-                android:layout_width="@dimen/list_width"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/taskTodoTextView"
                 android:minHeight="@dimen/min_height"
+                android:text="asd"
                 android:textColor="?attr/colorSecondary"
                 android:textSize="@dimen/normal_text_size"
                 android:textStyle="bold" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-        </LinearLayout>
+        </RelativeLayout>
 
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <LinearLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
+
+            <TextView
+                android:id="@+id/dateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/min_height"
+                android:text="@string/date"
+                android:textAlignment="viewStart"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="@dimen/normal_text_size" />
+
+            <EditText
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:inputType="date"
+                android:minHeight="@dimen/min_height"
+                android:clickable="true"
+                android:focusable="true"
+                android:hint="@string/add_date"
+                android:textColorHint="?attr/hintTextColor"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="@dimen/normal_text_size"
+                android:textStyle="bold"
+                android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+                android:layout_below="@id/dateEditText"/>
+
+        </RelativeLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <RelativeLayout
             android:id="@+id/row3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/row4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/row2">
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
 
             <TextView
                 android:id="@+id/timeTextView"
-                android:layout_width="@dimen/list_width"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/min_height"
                 android:text="Időpont"
                 android:textAlignment="viewStart"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="@dimen/normal_text_size" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
             <Spinner
                 android:id="@+id/timeSpinner"
-                android:layout_width="@dimen/list_width"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/timeTextView"
                 android:minHeight="@dimen/min_height"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="?attr/colorSecondary"
                 android:textSize="@dimen/normal_text_size"
                 android:textStyle="bold" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-        </LinearLayout>
+        </RelativeLayout>
 
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/row4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/row3">
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp">
 
             <TextView
                 android:id="@+id/officeTextView"
-                android:layout_width="@dimen/list_width"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/min_height"
-                android:text="Okmányiroda"
+                android:text="@string/office"
                 android:textAlignment="viewStart"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="@dimen/normal_text_size" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
             <Spinner
                 android:id="@+id/officeSpinner"
-                android:layout_width="@dimen/list_width"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/officeTextView"
                 android:minHeight="@dimen/min_height"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="?attr/colorSecondary"
                 android:textSize="@dimen/normal_text_size"
                 android:textStyle="bold" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/officeAddressTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/officeSpinner"
+                android:text="@string/choose_office_string"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="@dimen/normal_text_size" />
 
-        </LinearLayout>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:minHeight="@dimen/min_height"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="@dimen/normal_text_size"
-            android:textStyle="bold" />
+        </RelativeLayout>
 
         <Space
             android:layout_width="0dp"
