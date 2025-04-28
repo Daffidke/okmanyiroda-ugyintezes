@@ -1,11 +1,15 @@
 package com.example.okmanyirodaugyintezes;
 
+import android.graphics.drawable.Drawable;
+import android.view.animation.AlphaAnimation;
+import android.widget.EditText;
+
+import androidx.core.content.ContextCompat;
+
 import java.io.Serializable;
 
 public class UserDetails implements Serializable {
-    private String FullName;
-    private String PhoneNumber;
-    private String PostalAddress;
+    private String FullName, PhoneNumber, PostalAddress;
 
     public UserDetails(String FullName, String PhoneNumber, String PostalAddress){
         this.FullName = FullName;
@@ -13,6 +17,7 @@ public class UserDetails implements Serializable {
         this.PostalAddress = PostalAddress;
     }
 
+    // GETTER SETTER
     public String getFullName() {
         return FullName;
     }
@@ -35,5 +40,28 @@ public class UserDetails implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         PhoneNumber = phoneNumber;
+    }
+
+
+    // USER INPUT VALIDITY CHECK METHODS
+    public boolean isPhoneValid(String phone) {
+        return phone != null && !phone.isEmpty() &&
+                phone.matches("^[+]?[0-9]{10,15}$");
+    }
+
+    public boolean isNameValid(String name) {
+        return name != null && !name.trim().isEmpty() &&
+                name.matches("^(?=.*\\s)[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű\\s'-]{2,50}$");
+    }
+
+    public String reformatString(String fullName) {
+        StringBuilder result = new StringBuilder();
+        String[] splitName = fullName.split(" ");
+        for (String name : splitName) {
+            StringBuilder sb = new StringBuilder(name);
+            sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
+            result.append(sb).append(" ");
+        }
+        return result.toString().trim();
     }
 }

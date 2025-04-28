@@ -26,9 +26,8 @@
     <string name="reserve_task_string">Időpont foglalása</string>
     <string name="task_todo_string">Intézendő ügy</string>
     <string name="reserve_text">Foglalás</string>
-    <string name="choose_time_string">Válasszon ki egy időpontot!</string>
-    <string name="choose_office_string">Válasszon ki egy okmányirodát!</string>
     <string name="office">Okmányiroda</string>
     <string name="date">Dátum</string>
-    <string name="add_date">Adja meg a dátumot</string>
+    <string name="no_bookings_string">Itt jelennek meg a foglalásai</string>
+    <string name="delete_string">Törlés</string>
 </resources>

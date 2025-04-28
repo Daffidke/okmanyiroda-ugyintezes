@@ -1,11 +1,9 @@
 package com.example.okmanyirodaugyintezes;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -28,7 +26,6 @@ public class HomeActivity extends AppCompatActivity {
     // GLOBAL VARIABLES
     BottomNavigationView bottomNav;
     ProgressBar homeProgessBar;
-    private FirebaseUser user;
     private FirebaseAuth Auth;
     private FirebaseFirestore db;
     private UserDetails userDetails;
@@ -51,16 +48,19 @@ public class HomeActivity extends AppCompatActivity {
         // VALIDATING USER
         Auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        homeProgessBar.setVisibility(View.VISIBLE);
-        if (user != null) {
-            fetchUserData(user.getUid());
-            Log.d(LOG_TAG, "Sikeres bejelentkezés");
-        } else {
-            Log.d(LOG_TAG, "Sikertelen bejelentkezés");
-            finish();
+        if(savedInstanceState == null){
+            if (user != null) {
+                homeProgessBar.setVisibility(View.VISIBLE);
+                fetchUserData(user.getUid());
+                Log.d(LOG_TAG, "Sikeres bejelentkezés");
+            } else {
+                Log.d(LOG_TAG, "Sikertelen bejelentkezés");
+                finish();
+            }
         }
+
     }
 
     // GET USER DATA FROM FIRESTORE
@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity {
         if (itemId == R.id.nav_reservation) {
             selectedFragment = ReservationFragment.newInstance(userDetails);
         } else if (itemId == R.id.nav_booked) {
-            selectedFragment = new BookedFragment();
+            selectedFragment = BookedFragment.newInstance(userDetails);
         } else if (itemId == R.id.nav_useredit) {
             selectedFragment = UserEditFragment.newInstance(userDetails);
         } else {

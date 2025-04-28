@@ -2,22 +2,19 @@ package com.example.okmanyirodaugyintezes;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 public class ReservationFragment extends Fragment {
     // CONSTS
@@ -26,7 +23,6 @@ public class ReservationFragment extends Fragment {
 
     // GLOBAL VARIABLES
     private UserDetails userDetails;
-    private Button button1, button2, button3, button4, button5;
 
     public ReservationFragment() {
         super(R.layout.fragment_reservation);
@@ -46,6 +42,7 @@ public class ReservationFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);
+            Log.d(LOG_TAG, "User sikeresen lekérve");
         }
     }
 
@@ -54,17 +51,15 @@ public class ReservationFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        button1 = view.findViewById(R.id.button1);
-        button2 = view.findViewById(R.id.button2);
-        button3 = view.findViewById(R.id.button3);
-        button4 = view.findViewById(R.id.button4);
-        button5 = view.findViewById(R.id.button5);
+        Button button1 = view.findViewById(R.id.button1);
+        Button button2 = view.findViewById(R.id.button2);
+        Button button3 = view.findViewById(R.id.button3);
+        Button button4 = view.findViewById(R.id.button4);
+        Button button5 = view.findViewById(R.id.button5);
+        TextView fullNameTextView = view.findViewById(R.id.fullNameTextView);
 
-        // PASS USERNAME ON LOAD
-        if (userDetails != null) {
-            TextView fullNameTextView = view.findViewById(R.id.fullNameTextView);
-            fullNameTextView.setText(userDetails.getFullName());
-        }
+        // SHOW FULL NAME ON LOAD
+        if (userDetails != null) {fullNameTextView.setText(userDetails.getFullName());}
 
         // SHAKE ANIMATION ON LOAD
         ImageView calendarImageView = view.findViewById(R.id.calendar);
@@ -72,7 +67,7 @@ public class ReservationFragment extends Fragment {
         animator.setDuration(1200);
         animator.start();
 
-        // PASS THE TASK TO CHECKOUT
+        // PASS THE TASK TO CHECKOUT ACTIVITY
         View.OnClickListener buttonClickListener = v -> {
             if (v instanceof Button) {
                 String selectedText = ((Button) v).getText().toString();
@@ -93,5 +88,19 @@ public class ReservationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reservation, container, false);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it
+        }
     }
 }

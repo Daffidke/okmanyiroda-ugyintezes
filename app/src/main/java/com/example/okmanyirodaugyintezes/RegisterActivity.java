@@ -1,16 +1,11 @@
 package com.example.okmanyirodaugyintezes;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.content.SharedPreferences;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,12 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String PREF_KEY = Objects.requireNonNull(RegisterActivity.class.getPackage()).toString();
 
     // GLOBAL VARIABLES
-    private EditText fullNameEditText;
-    private EditText emailEditText;
-    private EditText phoneEditText;
-    private EditText addressEditText;
-    private EditText passwordEditText;
-    private EditText passwordConfirmEditText;
+    private EditText fullNameEditText, emailEditText, phoneEditText, addressEditText, passwordEditText, passwordConfirmEditText;
     private Button registerButton;
     private ProgressBar registerProgressBar;
     private FirebaseAuth Auth;
@@ -61,12 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // make the status bar the same color as the design
-        Window window = getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(getThemeColor(this, androidx.appcompat.R.attr.colorPrimary));
 
         // protection for non-intended usage
         int secret_key = getIntent().getIntExtra("SECRET_KEY", 0);
@@ -239,14 +223,6 @@ public class RegisterActivity extends AppCompatActivity {
         fadeIn.setFillAfter(true);
 
         editText.startAnimation(fadeIn);
-    }
-
-    // Getting theme color
-    public static int getThemeColor(Context context, int attrResId) {
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(attrResId, typedValue, true);
-        return typedValue.data;
     }
 
     // OVERRIDES

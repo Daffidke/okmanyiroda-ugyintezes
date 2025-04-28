@@ -2,13 +2,11 @@ package com.example.okmanyirodaugyintezes;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +18,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -34,16 +34,13 @@ public class CheckoutActivity extends AppCompatActivity {
     private static final String LOG_TAG = CheckoutActivity.class.getName();
 
     // GLOBAL VARIABLES
-    private TextView taskTextView;
+    private List<String> bookingsThisDay, timeSlots;
+    private TextView taskTextView, officeAddressTextView, availableTextView;
     private EditText datePicker;
-    private TextView officeAddressTextView;
-    private Spinner timeSpinner;
-    private Spinner officeSpinner;
-    private String officeId;
+    private Spinner timeSpinner, officeSpinner;
+    private String officeId, selectedDate, selectedTime;
     private FirebaseFirestore db;
-    private List<String> timeSlots;
-    private String selectedDate;
-    private int available;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,37 +53,29 @@ public class CheckoutActivity extends AppCompatActivity {
             return insets;
         });
 
+        // INIT
         Intent intent = getIntent();
         String task = intent.getStringExtra("task");
 
         db = FirebaseFirestore.getInstance();
-
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         taskTextView = findViewById(R.id.taskTextView);
         datePicker = findViewById(R.id.datePicker);
         timeSpinner = findViewById(R.id.timeSpinner);
         officeSpinner = findViewById(R.id.officeSpinner);
         officeAddressTextView = findViewById(R.id.officeAddressTextView);
-
+        availableTextView = findViewById(R.id.availableTextView);
+        user = auth.getCurrentUser();
         taskTextView.setText(task);
-        //datePicker.setMinDate(System.currentTimeMillis() - 1000);
-
         fetchOffices();
 
-        officeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                OfficeDetails selectedOffice = (OfficeDetails) parent.getItemAtPosition(position);
-                officeId = selectedOffice.getOfficeID();
-                fetchAvailableTimeSlots(selectedDate);
-                String updateOfficeAddressTextView = "Cím: " + selectedOffice.getAddress();
-                officeAddressTextView.setText(updateOfficeAddressTextView);
-            }
+        // DEFAULT STATE - TODAY
+        Calendar calendar_today = Calendar.getInstance();
+        selectedDate = formatDate(calendar_today.get(Calendar.YEAR), calendar_today.get(Calendar.MONTH), calendar_today.get(Calendar.DAY_OF_MONTH));
+        datePicker.setText(selectedDate);
+        fetchBookings(selectedDate);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
+        // CHANGING DATE
         datePicker.setOnClickListener(v -> {
             final Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
@@ -94,70 +83,104 @@ public class CheckoutActivity extends AppCompatActivity {
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(CheckoutActivity.this, (view, selectedYear, selectedMonth, selectedDay) -> {
-                String monthZero = "";
-                String dayZero = "";
-                if (selectedMonth + 1 < 10) {
-                    monthZero = "0";
-                }
-                if (selectedDay < 10) {
-                    dayZero = "0";
-                }
-                selectedDate = selectedYear + "." + monthZero + (selectedMonth + 1) + "." + dayZero + selectedDay + ".";
+                selectedDate = formatDate(selectedYear, selectedMonth, selectedDay);
                 datePicker.setText(selectedDate);
-                fetchAvailableTimeSlots(selectedDate);}, year, month, day
+                fetchBookings(selectedDate);
+            }, year, month, day
             );
 
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             datePickerDialog.show();
         });
 
-        // TODAY
-        Calendar calendar = Calendar.getInstance();
-        String monthZero = "";
-        String dayZero = "";
-        if (calendar.get(Calendar.MONTH) + 1 < 10) {
-            monthZero = "0";
-        }
-        if (calendar.get(Calendar.DAY_OF_MONTH) < 10) {
-            dayZero = "0";
-        }
-        String month = monthZero + (calendar.get(Calendar.MONTH) + 1);
-        String day = dayZero + calendar.get(Calendar.DAY_OF_MONTH);
-        selectedDate = calendar.get(Calendar.YEAR) + "." + month + "." + day + ".";
-        fetchAvailableTimeSlots(selectedDate);
+        // CHANGING OFFICE
+        officeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // update bookings in the selected office
+                OfficeDetails selectedOffice = (OfficeDetails) parent.getItemAtPosition(position);
+                officeId = selectedOffice.getOfficeID();
+                fetchBookings(selectedDate);
 
+                // update office address
+                String updateOfficeAddressTextView = "Cím: " + selectedOffice.getAddress();
+                officeAddressTextView.setText(updateOfficeAddressTextView);
 
+                // update availability in the selected office for selected time
+                String updateAvailableTextView = "Férőhelyek száma: " + availableSpace(selectedTime) + " fő.";
+                availableTextView.setText(updateAvailableTextView);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        // CHANGING TIME
+        timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedTime = (String) parent.getItemAtPosition(position);
+                String updateAvailableTextView = "Férőhelyek száma: " + availableSpace(selectedTime) + " fő.";
+                availableTextView.setText(updateAvailableTextView);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    // INSERT RESERVATION TO FIRESTORE
+    public void insertReservation(View view) {
+        String date = selectedDate;
+        String time = selectedTime;
+        String email = user.getEmail();
+        String task = taskTextView.getText().toString();
+
+        Map<String, Object> booking = new HashMap<>();
+        booking.put("date", date);
+        booking.put("time", time);
+        booking.put("email", email);
+        booking.put("task", task);
+        booking.put("office_id", officeId);
+
+        db.collection("bookings")
+                .add(booking)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d(LOG_TAG, "Le sikerült foglalni az időpontot");
+                    Toast.makeText(this, "Sikeres foglalás", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Log.d(LOG_TAG, "Nem sikerült lefoglalni az időpontot: " + e.getMessage());
+                    Toast.makeText(this, "Sikertelen foglalás", Toast.LENGTH_SHORT).show();
+                });
     }
 
     // GET BOOKINGS FROM FIRESTORE ON SELECTED DATE
-    private void fetchAvailableTimeSlots(String selectedDate) {
+    private void fetchBookings(String selectedDate) {
         timeSlots = generateTimeSlots();
+        bookingsThisDay = new ArrayList<>();
 
         db.collection("bookings")
                 .whereEqualTo("office_id", officeId)
                 .whereEqualTo("date", selectedDate)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
-                    Map<String, Integer> bookingCounts = new HashMap<>();
-
                     for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
                         String time = doc.getString("time");
-                        bookingCounts.put(time, bookingCounts.merge(time, 1, Integer::sum));
+                        bookingsThisDay.add(time);
                     }
 
+                    // SHOW AVAILABLE ONLY
                     List<String> availableSlots = new ArrayList<>();
-                    for (String time : timeSlots) {
-                        available = 5;
-                        for (Map.Entry<String, Integer> entry : bookingCounts.entrySet()) {
-                            if (entry.getKey().equals(time)) {
-                                available--;
-                            }
-                        }
-                        if (available > 0) {
-                            availableSlots.add(time + " - " + available + " hely");
+                    for(String time : timeSlots){
+                        if(availableSpace(time) > 0){
+                            availableSlots.add(time);
                         }
                     }
-
                     updateTimeSlotSpinner(availableSlots);
                 })
                 .addOnFailureListener(e -> {
@@ -189,16 +212,39 @@ public class CheckoutActivity extends AppCompatActivity {
                 });
     }
 
+    private int availableSpace(String selectedTime) {
+        int count = 5;
+        for (String time : bookingsThisDay) {
+            if (selectedTime.equals(time)) {
+                count--;
+            }
+        }
+        return count;
+    }
+
     private void updateTimeSlotSpinner(List<String> slots) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, slots);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, slots);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timeSpinner.setAdapter(adapter);
     }
 
     private void updateOfficeSpinner(List<OfficeDetails> offices) {
-        ArrayAdapter<OfficeDetails> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, offices);
+        ArrayAdapter<OfficeDetails> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, offices);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         officeSpinner.setAdapter(adapter);
+    }
+
+    public String formatDate(int year, int month, int day) {
+        month++;
+        String monthZero = "";
+        String dayZero = "";
+        if (month < 10) {
+            monthZero = "0";
+        }
+        if (day < 10) {
+            dayZero = "0";
+        }
+        return year + "." + monthZero + month + "." + dayZero + day + ".";
     }
 
     private List<String> generateTimeSlots() {

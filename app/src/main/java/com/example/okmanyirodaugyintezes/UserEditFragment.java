@@ -90,12 +90,12 @@ public class UserEditFragment extends Fragment {
 
         // validity check
         boolean check = true;
-        if (!isNameValid(fullName)) {
+        if (!userDetails.isNameValid(fullName)) {
             showErrorWithFadeIn(fullNameEditText, "Adja meg helyesen a teljes nevét (pl. Nagy Sándor)");
             Log.e(LOG_TAG, "Hibás / hiányzó név");
             check = false;
         }
-        if (!isPhoneValid(phone)) {
+        if (!userDetails.isPhoneValid(phone)) {
             showErrorWithFadeIn(phoneNumberEditText, "Adja meg helyesen a telefonszámát (pl. 06207365539)");
             Log.e(LOG_TAG, "Hibás / hiányzó telefonszám");
             check = false;
@@ -117,9 +117,9 @@ public class UserEditFragment extends Fragment {
 
             String userId = user.getUid();
             Map<String, Object> userMap = new HashMap<>();
-            userMap.put("fullName", reformatString(fullName));
+            userMap.put("fullName", userDetails.reformatString(fullName));
             userMap.put("phone", phone);
-            userMap.put("address", reformatString(address));
+            userMap.put("address", userDetails.reformatString(address));
 
             firestore.collection("users").document(userId)
                     .update(userMap)
@@ -127,9 +127,9 @@ public class UserEditFragment extends Fragment {
                         updateProgressBar.setVisibility(View.GONE);
                         updateButton.setEnabled(true);
 
-                        userDetails.setFullName(reformatString(fullName));
+                        userDetails.setFullName(userDetails.reformatString(fullName));
                         userDetails.setPhoneNumber(phone);
-                        userDetails.setPostalAddress(reformatString(address));
+                        userDetails.setPostalAddress(userDetails.reformatString(address));
 
                         Log.d(LOG_TAG, "Felhasználó sikeresen módosítva.");
                         Toast.makeText(getContext(), "Sikeres módosítás!", Toast.LENGTH_SHORT).show();
@@ -151,28 +151,6 @@ public class UserEditFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_user_edit, container, false);
     }
 
-    // INPUT VALIDITY CHECK METHODS
-    boolean isPhoneValid(String phone) {
-        return phone != null && !phone.isEmpty() &&
-                phone.matches("^[+]?[0-9]{10,15}$");
-    }
-
-    boolean isNameValid(String name) {
-        return name != null && !name.trim().isEmpty() &&
-                name.matches("^(?=.*\\s)[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű\\s'-]{2,50}$");
-    }
-
-    String reformatString(String fullName) {
-        StringBuilder result = new StringBuilder();
-        String[] splitName = fullName.split(" ");
-        for (String name : splitName) {
-            StringBuilder sb = new StringBuilder(name);
-            sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
-            result.append(sb).append(" ");
-        }
-        return result.toString().trim();
-    }
-
     // EditText Invalid Input Fade-In Animation
     private void showErrorWithFadeIn(EditText editText, String errorMsg) {
         Drawable errorIcon = ContextCompat.getDrawable(requireContext(), R.drawable.error_icon);
@@ -187,4 +165,19 @@ public class UserEditFragment extends Fragment {
 
         editText.startAnimation(fadeIn);
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it
+        }
+    }
+
 }
