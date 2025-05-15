@@ -1,13 +1,10 @@
 package com.example.okmanyirodaugyintezes;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
@@ -132,15 +129,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
-
-    // Getting theme color
-    public static int getThemeColor(Context context, int attrResId) {
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = context.getTheme();
-        theme.resolveAttribute(attrResId, typedValue, true);
-        return typedValue.data;
-    }
-
 
     // OVERRIDES
     @Override

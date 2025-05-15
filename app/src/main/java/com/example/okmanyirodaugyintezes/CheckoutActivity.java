@@ -1,8 +1,14 @@
 package com.example.okmanyirodaugyintezes;
 
+import android.Manifest;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,10 +30,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -71,7 +82,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         // DEFAULT STATE - TODAY
         Calendar calendar_today = Calendar.getInstance();
-        selectedDate = formatDate(calendar_today.get(Calendar.YEAR), calendar_today.get(Calendar.MONTH), calendar_today.get(Calendar.DAY_OF_MONTH));
+        selectedDate = formatDate(calendar_today.get(Calendar.YEAR), calendar_today.get(Calendar.MONTH), calendar_today.get(Calendar.DAY_OF_MONTH)+1);
         datePicker.setText(selectedDate);
         fetchBookings(selectedDate);
 
@@ -89,7 +100,7 @@ public class CheckoutActivity extends AppCompatActivity {
             }, year, month, day
             );
 
-            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
             datePickerDialog.show();
         });
 
@@ -151,6 +162,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentReference -> {
                     Log.d(LOG_TAG, "Le sikerült foglalni az időpontot");
                     Toast.makeText(this, "Sikeres foglalás", Toast.LENGTH_SHORT).show();
+                    scheduleEventReminder();
                     finish();
                 })
                 .addOnFailureListener(e -> {
@@ -232,6 +244,72 @@ public class CheckoutActivity extends AppCompatActivity {
         ArrayAdapter<OfficeDetails> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, offices);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         officeSpinner.setAdapter(adapter);
+    }
+
+    // Permission, AlarmManager
+    @RequiresPermission(Manifest.permission.SCHEDULE_EXACT_ALARM)
+    public void scheduleEventReminder() {
+        long eventStartMillis = getEventTimeMillis();
+        if(eventStartMillis == -1){
+            return;
+        }
+
+        // 5 hours
+        long reminderTimeMillis = eventStartMillis - (5 * 60 * 60 * 1000);
+
+        // reminder time is in the past
+        if (reminderTimeMillis < System.currentTimeMillis()) {
+            return;
+        }
+
+        Intent intent = new Intent(this, EventReminderReceiver.class);
+        intent.putExtra("title", "Foglalás emlékeztető");
+        intent.putExtra("description", "Rögzített foglalásod van 5 óra múlva");
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int) eventStartMillis, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        // permission check to schedule exact alarms
+        boolean permission = false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager.canScheduleExactAlarms()) {
+                permission = true;
+                Log.d(LOG_TAG, "Van permission");
+            } else {
+                Intent intentSettings = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+                startActivity(intentSettings);
+                Log.d(LOG_TAG, "Átirányítás a beállításokba");
+            }
+        } else {
+            permission = true;
+        }
+        if(permission){
+            alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    reminderTimeMillis,
+                    pendingIntent
+            );
+            Log.d(LOG_TAG, "Értesítő sikeresen bekapcsolva");
+        }
+        else{
+            Log.d(LOG_TAG, "Értesítő bekapcsolása sikertelen");
+        }
+    }
+
+    public long getEventTimeMillis() {
+        String pattern = "yyyy.MM.dd. HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
+        try {
+            Date date = sdf.parse(selectedDate + " " + selectedTime);
+            if (date != null) {
+                Log.d(LOG_TAG, "Értesítés ekkor: " + date);
+                return date.getTime();
+            }
+        } catch (ParseException e) {
+            Log.e(LOG_TAG, "Nem sikerült átváltani idő formátumba" + e);
+        }
+        return -1;
     }
 
     public String formatDate(int year, int month, int day) {

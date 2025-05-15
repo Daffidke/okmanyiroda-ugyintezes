@@ -1,0 +1,1840 @@
+Index: .idea/appInsightsSettings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/appInsightsSettings.xml b/.idea/appInsightsSettings.xml
+new file mode 100644
+--- /dev/null	(date 1747329585657)
++++ b/.idea/appInsightsSettings.xml	(date 1747329585657)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AppInsightsSettings">
++    <option name="selectedTabId" value="Firebase Crashlytics" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/booking_card.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.cardview.widget.CardView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_margin=\"@dimen/basic_margin\"\r\n    app:cardCornerRadius=\"10dp\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\"\r\n        android:padding=\"16dp\"\r\n        android:background=\"?attr/colorPrimary\"\r\n        >\r\n\r\n        <TextView\r\n            android:id=\"@+id/taskTextView\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textSize=\"@dimen/normal_text_size\"\r\n            android:textColor=\"?attr/backgroundColor\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/dateTextView\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textSize=\"@dimen/normal_text_size\"\r\n            android:textColor=\"?attr/backgroundColor\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/timeTextView\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textSize=\"@dimen/normal_text_size\"\r\n            android:textColor=\"?attr/backgroundColor\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/officeTextView\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textSize=\"@dimen/normal_text_size\"\r\n            android:textColor=\"?attr/backgroundColor\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/addressTextView\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:textSize=\"@dimen/normal_text_size\"\r\n            android:textColor=\"?attr/backgroundColor\"/>\r\n    </LinearLayout>\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/deleteButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_gravity=\"end|center\"\r\n        android:layout_margin=\"@dimen/basic_margin\"\r\n        android:background=\"@android:color/transparent\"\r\n        android:src=\"@drawable/delete_icon\"\r\n        android:contentDescription=\"@string/delete_string\" />\r\n\r\n</androidx.cardview.widget.CardView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/booking_card.xml b/app/src/main/res/layout/booking_card.xml
+--- a/app/src/main/res/layout/booking_card.xml	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/res/layout/booking_card.xml	(date 1747340472035)
+@@ -49,6 +49,14 @@
+             android:layout_height="wrap_content"
+             android:textSize="@dimen/normal_text_size"
+             android:textColor="?attr/backgroundColor"/>
++
++        <TextView
++            android:id="@+id/notificationTextView"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:textSize="@dimen/normal_text_size"
++            android:text="@string/notification"
++            android:textColor="?attr/backgroundColor"/>
+     </LinearLayout>
+ 
+     <ImageButton
+Index: app/src/main/res/layout/activity_checkout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"?attr/colorPrimary\"\r\n    tools:context=\".CheckoutActivity\">\r\n\r\n    <androidx.constraintlayout.widget.Guideline\r\n        android:id=\"@+id/topGuideline\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\"\r\n        app:layout_constraintGuide_percent=\"0.1\" />\r\n\r\n    <androidx.constraintlayout.widget.Guideline\r\n        android:id=\"@+id/bottomGuideline\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"horizontal\"\r\n        app:layout_constraintGuide_percent=\"0.9\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/cancelImageView\"\r\n        android:layout_width=\"@dimen/min_height\"\r\n        android:layout_height=\"@dimen/min_height\"\r\n        android:layout_marginStart=\"@dimen/small_margin\"\r\n        android:background=\"@drawable/back_arrow\"\r\n        android:backgroundTint=\"?attr/backgroundColor\"\r\n        android:contentDescription=\"@string/cancel_text\"\r\n        android:gravity=\"center\"\r\n        android:minHeight=\"@dimen/min_height\"\r\n        android:onClick=\"cancel\"\r\n        app:layout_constraintBottom_toTopOf=\"@id/topGuideline\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/taskTitle\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"@dimen/min_height\"\r\n        android:text=\"@string/reserve_task_string\"\r\n        android:textAlignment=\"center\"\r\n        android:textColor=\"?attr/backgroundColor\"\r\n        android:textSize=\"@dimen/title_text_size\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toTopOf=\"@id/topGuideline\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:background=\"?attr/backgroundColor\"\r\n        android:orientation=\"vertical\"\r\n        app:layout_constraintBottom_toTopOf=\"@id/bottomGuideline\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/topGuideline\">\r\n\r\n        <Space\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_weight=\"0.5\" />\r\n\r\n        <RelativeLayout\r\n            android:id=\"@+id/row1\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"40dp\"\r\n            android:layout_marginEnd=\"40dp\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/taskTodoTextView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"@dimen/min_height\"\r\n                android:text=\"@string/task_todo_string\"\r\n                android:gravity=\"start|center\"\r\n                android:textColor=\"?attr/colorPrimary\"\r\n                android:textSize=\"@dimen/normal_text_size\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/taskTextView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@id/taskTodoTextView\"\r\n                android:minHeight=\"@dimen/min_height\"\r\n                android:gravity=\"start|center\"\r\n                android:paddingStart=\"@dimen/basic_margin\"\r\n                android:paddingEnd=\"@dimen/basic_margin\"\r\n                android:textColor=\"?attr/colorSecondary\"\r\n                android:textSize=\"@dimen/normal_text_size\"\r\n                android:textStyle=\"bold\" />\r\n\r\n        </RelativeLayout>\r\n\r\n        <Space\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_weight=\"0.5\" />\r\n\r\n        <RelativeLayout\r\n            android:id=\"@+id/row4\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"40dp\"\r\n            android:layout_marginEnd=\"40dp\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/officeTextView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"@dimen/min_height\"\r\n                android:text=\"@string/office\"\r\n                android:gravity=\"start|center\"\r\n                android:textColor=\"?attr/colorPrimary\"\r\n                android:textSize=\"@dimen/normal_text_size\" />\r\n\r\n            <Spinner\r\n                android:id=\"@+id/officeSpinner\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@id/officeTextView\"\r\n                android:minHeight=\"@dimen/min_height\"\r\n                android:textColor=\"?attr/colorSecondary\"\r\n                android:textSize=\"@dimen/normal_text_size\"\r\n                android:textStyle=\"bold\"\r\n                android:background=\"@drawable/spinner_background\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/officeAddressTextView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:minHeight=\"@dimen/min_height\"\r\n                android:gravity=\"start|center\"\r\n                android:layout_below=\"@id/officeSpinner\"\r\n                android:textColor=\"?attr/colorSecondary\"\r\n                android:textSize=\"@dimen/normal_text_size\" />\r\n\r\n        </RelativeLayout>\r\n\r\n        <Space\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_weight=\"1\" />\r\n\r\n        <RelativeLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"40dp\"\r\n            android:layout_marginEnd=\"40dp\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/dateEditText\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"@dimen/min_height\"\r\n                android:text=\"@string/date\"\r\n                android:gravity=\"start|center\"\r\n                android:textColor=\"?attr/colorPrimary\"\r\n                android:textSize=\"@dimen/normal_text_size\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/datePicker\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:autofillHints=\"\"\r\n                android:inputType=\"date\"\r\n                android:minHeight=\"@dimen/min_height\"\r\n                android:clickable=\"true\"\r\n                android:focusable=\"false\"\r\n                android:textColorHint=\"?attr/hintTextColor\"\r\n                android:textColor=\"?attr/colorSecondary\"\r\n                android:textSize=\"@dimen/normal_text_size\"\r\n                android:textStyle=\"bold\"\r\n                android:paddingStart=\"@dimen/basic_margin\"\r\n                android:paddingEnd=\"@dimen/basic_margin\"\r\n                android:background=\"@drawable/spinner_background\"\r\n                android:drawableEnd=\"@android:drawable/ic_menu_my_calendar\"\r\n                android:layout_below=\"@id/dateEditText\"/>\r\n\r\n        </RelativeLayout>\r\n\r\n        <Space\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_weight=\"1\" />\r\n\r\n        <RelativeLayout\r\n            android:id=\"@+id/row3\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"40dp\"\r\n            android:layout_marginEnd=\"40dp\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/timeTextView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"@dimen/min_height\"\r\n                android:text=\"Időpont\"\r\n                android:gravity=\"start|center\"\r\n                android:textColor=\"?attr/colorPrimary\"\r\n                android:textSize=\"@dimen/normal_text_size\" />\r\n\r\n            <Spinner\r\n                android:id=\"@+id/timeSpinner\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@id/timeTextView\"\r\n                android:minHeight=\"@dimen/min_height\"\r\n                android:textColor=\"?attr/colorSecondary\"\r\n                android:textSize=\"@dimen/normal_text_size\"\r\n                android:textStyle=\"bold\"\r\n                android:background=\"@drawable/spinner_background\"/>\r\n\r\n            <TextView\r\n                android:id=\"@+id/availableTextView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:minHeight=\"@dimen/min_height\"\r\n                android:gravity=\"start|center\"\r\n                android:layout_below=\"@id/timeSpinner\"\r\n                android:textColor=\"?attr/colorSecondary\"\r\n                android:textSize=\"@dimen/normal_text_size\" />\r\n\r\n        </RelativeLayout>\r\n\r\n        <Space\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_weight=\"1\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/insertButton\"\r\n        android:layout_width=\"@dimen/login_field_margin\"\r\n        android:layout_height=\"@dimen/min_height\"\r\n        android:backgroundTint=\"?attr/backgroundColor\"\r\n        android:text=\"@string/reserve_text\"\r\n        android:textColor=\"?attr/colorPrimary\"\r\n        android:textSize=\"@dimen/normal_text_size\"\r\n        android:onClick=\"insertReservation\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/bottomGuideline\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_checkout.xml b/app/src/main/res/layout/activity_checkout.xml
+--- a/app/src/main/res/layout/activity_checkout.xml	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/res/layout/activity_checkout.xml	(date 1747334981780)
+@@ -1,248 +1,254 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:id="@+id/main"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="?attr/colorPrimary"
+-    tools:context=".CheckoutActivity">
++<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:fillViewport="true">
++
++    <androidx.constraintlayout.widget.ConstraintLayout
++        xmlns:app="http://schemas.android.com/apk/res-auto"
++        xmlns:tools="http://schemas.android.com/tools"
++        android:id="@+id/main"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:background="?attr/colorPrimary"
++        tools:context=".CheckoutActivity">
+ 
+-    <androidx.constraintlayout.widget.Guideline
+-        android:id="@+id/topGuideline"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:orientation="horizontal"
+-        app:layout_constraintGuide_percent="0.1" />
++        <androidx.constraintlayout.widget.Guideline
++            android:id="@+id/topGuideline"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            app:layout_constraintGuide_percent="0.1" />
+ 
+-    <androidx.constraintlayout.widget.Guideline
+-        android:id="@+id/bottomGuideline"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:orientation="horizontal"
+-        app:layout_constraintGuide_percent="0.9" />
++        <androidx.constraintlayout.widget.Guideline
++            android:id="@+id/bottomGuideline"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            app:layout_constraintGuide_percent="0.9" />
+ 
+-    <ImageView
+-        android:id="@+id/cancelImageView"
+-        android:layout_width="@dimen/min_height"
+-        android:layout_height="@dimen/min_height"
+-        android:layout_marginStart="@dimen/small_margin"
+-        android:background="@drawable/back_arrow"
+-        android:backgroundTint="?attr/backgroundColor"
+-        android:contentDescription="@string/cancel_text"
+-        android:gravity="center"
+-        android:minHeight="@dimen/min_height"
+-        android:onClick="cancel"
+-        app:layout_constraintBottom_toTopOf="@id/topGuideline"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
++        <ImageView
++            android:id="@+id/cancelImageView"
++            android:layout_width="@dimen/min_height"
++            android:layout_height="@dimen/min_height"
++            android:layout_marginStart="@dimen/small_margin"
++            android:background="@drawable/back_arrow"
++            android:backgroundTint="?attr/backgroundColor"
++            android:contentDescription="@string/cancel_text"
++            android:gravity="center"
++            android:minHeight="@dimen/min_height"
++            android:onClick="cancel"
++            app:layout_constraintBottom_toTopOf="@id/topGuideline"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent" />
+ 
+-    <TextView
+-        android:id="@+id/taskTitle"
+-        android:layout_width="match_parent"
+-        android:layout_height="@dimen/min_height"
+-        android:text="@string/reserve_task_string"
+-        android:textAlignment="center"
+-        android:textColor="?attr/backgroundColor"
+-        android:textSize="@dimen/title_text_size"
+-        android:textStyle="bold"
+-        app:layout_constraintBottom_toTopOf="@id/topGuideline"
+-        app:layout_constraintTop_toTopOf="parent" />
++        <TextView
++            android:id="@+id/taskTitle"
++            android:layout_width="match_parent"
++            android:layout_height="@dimen/min_height"
++            android:text="@string/reserve_task_string"
++            android:textAlignment="center"
++            android:textColor="?attr/backgroundColor"
++            android:textSize="@dimen/title_text_size"
++            android:textStyle="bold"
++            app:layout_constraintBottom_toTopOf="@id/topGuideline"
++            app:layout_constraintTop_toTopOf="parent" />
+ 
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="0dp"
+-        android:background="?attr/backgroundColor"
+-        android:orientation="vertical"
+-        app:layout_constraintBottom_toTopOf="@id/bottomGuideline"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@id/topGuideline">
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="0dp"
++            android:background="?attr/backgroundColor"
++            android:orientation="vertical"
++            app:layout_constraintBottom_toTopOf="@id/bottomGuideline"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@id/topGuideline">
+ 
+-        <Space
+-            android:layout_width="0dp"
+-            android:layout_height="0dp"
+-            android:layout_weight="0.5" />
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="0.5" />
+ 
+-        <RelativeLayout
+-            android:id="@+id/row1"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginStart="40dp"
+-            android:layout_marginEnd="40dp">
++            <RelativeLayout
++                android:id="@+id/row1"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="40dp"
++                android:layout_marginEnd="40dp">
+ 
+-            <TextView
+-                android:id="@+id/taskTodoTextView"
+-                android:layout_width="match_parent"
+-                android:layout_height="@dimen/min_height"
+-                android:text="@string/task_todo_string"
+-                android:gravity="start|center"
+-                android:textColor="?attr/colorPrimary"
+-                android:textSize="@dimen/normal_text_size" />
++                <TextView
++                    android:id="@+id/taskTodoTextView"
++                    android:layout_width="match_parent"
++                    android:layout_height="@dimen/min_height"
++                    android:text="@string/task_todo_string"
++                    android:gravity="start|center"
++                    android:textColor="?attr/colorPrimary"
++                    android:textSize="@dimen/normal_text_size" />
+ 
+-            <TextView
+-                android:id="@+id/taskTextView"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_below="@id/taskTodoTextView"
+-                android:minHeight="@dimen/min_height"
+-                android:gravity="start|center"
+-                android:paddingStart="@dimen/basic_margin"
+-                android:paddingEnd="@dimen/basic_margin"
+-                android:textColor="?attr/colorSecondary"
+-                android:textSize="@dimen/normal_text_size"
+-                android:textStyle="bold" />
++                <TextView
++                    android:id="@+id/taskTextView"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@id/taskTodoTextView"
++                    android:minHeight="@dimen/min_height"
++                    android:gravity="start|center"
++                    android:paddingStart="@dimen/basic_margin"
++                    android:paddingEnd="@dimen/basic_margin"
++                    android:textColor="?attr/colorSecondary"
++                    android:textSize="@dimen/normal_text_size"
++                    android:textStyle="bold" />
+ 
+-        </RelativeLayout>
++            </RelativeLayout>
+ 
+-        <Space
+-            android:layout_width="0dp"
+-            android:layout_height="0dp"
+-            android:layout_weight="0.5" />
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="0.5" />
+ 
+-        <RelativeLayout
+-            android:id="@+id/row4"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginStart="40dp"
+-            android:layout_marginEnd="40dp">
++            <RelativeLayout
++                android:id="@+id/row4"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="40dp"
++                android:layout_marginEnd="40dp">
+ 
+-            <TextView
+-                android:id="@+id/officeTextView"
+-                android:layout_width="match_parent"
+-                android:layout_height="@dimen/min_height"
+-                android:text="@string/office"
+-                android:gravity="start|center"
+-                android:textColor="?attr/colorPrimary"
+-                android:textSize="@dimen/normal_text_size" />
++                <TextView
++                    android:id="@+id/officeTextView"
++                    android:layout_width="match_parent"
++                    android:layout_height="@dimen/min_height"
++                    android:text="@string/office"
++                    android:gravity="start|center"
++                    android:textColor="?attr/colorPrimary"
++                    android:textSize="@dimen/normal_text_size" />
+ 
+-            <Spinner
+-                android:id="@+id/officeSpinner"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_below="@id/officeTextView"
+-                android:minHeight="@dimen/min_height"
+-                android:textColor="?attr/colorSecondary"
+-                android:textSize="@dimen/normal_text_size"
+-                android:textStyle="bold"
+-                android:background="@drawable/spinner_background"/>
++                <Spinner
++                    android:id="@+id/officeSpinner"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@id/officeTextView"
++                    android:minHeight="@dimen/min_height"
++                    android:textColor="?attr/colorSecondary"
++                    android:textSize="@dimen/normal_text_size"
++                    android:textStyle="bold"
++                    android:background="@drawable/spinner_background"/>
+ 
+-            <TextView
+-                android:id="@+id/officeAddressTextView"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:minHeight="@dimen/min_height"
+-                android:gravity="start|center"
+-                android:layout_below="@id/officeSpinner"
+-                android:textColor="?attr/colorSecondary"
+-                android:textSize="@dimen/normal_text_size" />
++                <TextView
++                    android:id="@+id/officeAddressTextView"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:minHeight="@dimen/min_height"
++                    android:gravity="start|center"
++                    android:layout_below="@id/officeSpinner"
++                    android:textColor="?attr/colorSecondary"
++                    android:textSize="@dimen/normal_text_size" />
+ 
+-        </RelativeLayout>
++            </RelativeLayout>
+ 
+-        <Space
+-            android:layout_width="0dp"
+-            android:layout_height="0dp"
+-            android:layout_weight="1" />
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="1" />
+ 
+-        <RelativeLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginStart="40dp"
+-            android:layout_marginEnd="40dp">
++            <RelativeLayout
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="40dp"
++                android:layout_marginEnd="40dp">
+ 
+-            <TextView
+-                android:id="@+id/dateEditText"
+-                android:layout_width="match_parent"
+-                android:layout_height="@dimen/min_height"
+-                android:text="@string/date"
+-                android:gravity="start|center"
+-                android:textColor="?attr/colorPrimary"
+-                android:textSize="@dimen/normal_text_size" />
++                <TextView
++                    android:id="@+id/dateEditText"
++                    android:layout_width="match_parent"
++                    android:layout_height="@dimen/min_height"
++                    android:text="@string/date"
++                    android:gravity="start|center"
++                    android:textColor="?attr/colorPrimary"
++                    android:textSize="@dimen/normal_text_size" />
+ 
+-            <EditText
+-                android:id="@+id/datePicker"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:autofillHints=""
+-                android:inputType="date"
+-                android:minHeight="@dimen/min_height"
+-                android:clickable="true"
+-                android:focusable="false"
+-                android:textColorHint="?attr/hintTextColor"
+-                android:textColor="?attr/colorSecondary"
+-                android:textSize="@dimen/normal_text_size"
+-                android:textStyle="bold"
+-                android:paddingStart="@dimen/basic_margin"
+-                android:paddingEnd="@dimen/basic_margin"
+-                android:background="@drawable/spinner_background"
+-                android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+-                android:layout_below="@id/dateEditText"/>
++                <EditText
++                    android:id="@+id/datePicker"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:autofillHints=""
++                    android:inputType="date"
++                    android:minHeight="@dimen/min_height"
++                    android:clickable="true"
++                    android:focusable="false"
++                    android:textColorHint="?attr/hintTextColor"
++                    android:textColor="?attr/colorSecondary"
++                    android:textSize="@dimen/normal_text_size"
++                    android:textStyle="bold"
++                    android:paddingStart="@dimen/basic_margin"
++                    android:paddingEnd="@dimen/basic_margin"
++                    android:background="@drawable/spinner_background"
++                    android:drawableEnd="@android:drawable/ic_menu_my_calendar"
++                    android:layout_below="@id/dateEditText"/>
+ 
+-        </RelativeLayout>
++            </RelativeLayout>
+ 
+-        <Space
+-            android:layout_width="0dp"
+-            android:layout_height="0dp"
+-            android:layout_weight="1" />
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="1" />
+ 
+-        <RelativeLayout
+-            android:id="@+id/row3"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginStart="40dp"
+-            android:layout_marginEnd="40dp">
++            <RelativeLayout
++                android:id="@+id/row3"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_marginStart="40dp"
++                android:layout_marginEnd="40dp">
+ 
+-            <TextView
+-                android:id="@+id/timeTextView"
+-                android:layout_width="match_parent"
+-                android:layout_height="@dimen/min_height"
+-                android:text="Időpont"
+-                android:gravity="start|center"
+-                android:textColor="?attr/colorPrimary"
+-                android:textSize="@dimen/normal_text_size" />
++                <TextView
++                    android:id="@+id/timeTextView"
++                    android:layout_width="match_parent"
++                    android:layout_height="@dimen/min_height"
++                    android:text="Időpont"
++                    android:gravity="start|center"
++                    android:textColor="?attr/colorPrimary"
++                    android:textSize="@dimen/normal_text_size" />
+ 
+-            <Spinner
+-                android:id="@+id/timeSpinner"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_below="@id/timeTextView"
+-                android:minHeight="@dimen/min_height"
+-                android:textColor="?attr/colorSecondary"
+-                android:textSize="@dimen/normal_text_size"
+-                android:textStyle="bold"
+-                android:background="@drawable/spinner_background"/>
++                <Spinner
++                    android:id="@+id/timeSpinner"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:layout_below="@id/timeTextView"
++                    android:minHeight="@dimen/min_height"
++                    android:textColor="?attr/colorSecondary"
++                    android:textSize="@dimen/normal_text_size"
++                    android:textStyle="bold"
++                    android:background="@drawable/spinner_background"/>
+ 
+-            <TextView
+-                android:id="@+id/availableTextView"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:minHeight="@dimen/min_height"
+-                android:gravity="start|center"
+-                android:layout_below="@id/timeSpinner"
+-                android:textColor="?attr/colorSecondary"
+-                android:textSize="@dimen/normal_text_size" />
++                <TextView
++                    android:id="@+id/availableTextView"
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:minHeight="@dimen/min_height"
++                    android:gravity="start|center"
++                    android:layout_below="@id/timeSpinner"
++                    android:textColor="?attr/colorSecondary"
++                    android:textSize="@dimen/normal_text_size" />
+ 
+-        </RelativeLayout>
++            </RelativeLayout>
+ 
+-        <Space
+-            android:layout_width="0dp"
+-            android:layout_height="0dp"
+-            android:layout_weight="1" />
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="1" />
+ 
+-    </LinearLayout>
++        </LinearLayout>
+ 
+-    <Button
+-        android:id="@+id/insertButton"
+-        android:layout_width="@dimen/login_field_margin"
+-        android:layout_height="@dimen/min_height"
+-        android:backgroundTint="?attr/backgroundColor"
+-        android:text="@string/reserve_text"
+-        android:textColor="?attr/colorPrimary"
+-        android:textSize="@dimen/normal_text_size"
+-        android:onClick="insertReservation"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@id/bottomGuideline" />
++        <Button
++            android:id="@+id/insertButton"
++            android:layout_width="@dimen/login_field_margin"
++            android:layout_height="@dimen/min_height"
++            android:backgroundTint="?attr/backgroundColor"
++            android:text="@string/reserve_text"
++            android:textColor="?attr/colorPrimary"
++            android:textSize="@dimen/normal_text_size"
++            android:onClick="insertReservation"
++            app:layout_constraintBottom_toBottomOf="parent"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@id/bottomGuideline" />
+ 
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++    </androidx.constraintlayout.widget.ConstraintLayout>
++</ScrollView>
+\ No newline at end of file
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    id(\"com.google.gms.google-services\")\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.example.okmanyirodaugyintezes\"\r\n    compileSdk = 35\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.example.okmanyirodaugyintezes\"\r\n        minSdk = 24\r\n        targetSdk = 35\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n        multiDexEnabled = true\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation(libs.appcompat)\r\n    implementation(libs.material)\r\n    implementation(libs.activity)\r\n    implementation(libs.constraintlayout)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.ext.junit)\r\n    androidTestImplementation(libs.espresso.core)\r\n\r\n    implementation(platform(libs.firebase.bom))\r\n    implementation(libs.firebase.firestore)\r\n    implementation(libs.firebase.firestore.v24111)\r\n    implementation(libs.firebase.analytics)\r\n    implementation(libs.firebase.auth)\r\n    implementation(libs.play.services.auth)\r\n    implementation(libs.multidex)\r\n\r\n    implementation(libs.material.v1110)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/build.gradle.kts	(date 1747333198833)
+@@ -37,7 +37,9 @@
+     implementation(libs.appcompat)
+     implementation(libs.material)
+     implementation(libs.activity)
++    implementation(libs.fragment)
+     implementation(libs.constraintlayout)
++    implementation(libs.lifecycle.viewmodel.android)
+     testImplementation(libs.junit)
+     androidTestImplementation(libs.ext.junit)
+     androidTestImplementation(libs.espresso.core)
+@@ -47,8 +49,12 @@
+     implementation(libs.firebase.firestore.v24111)
+     implementation(libs.firebase.analytics)
+     implementation(libs.firebase.auth)
++    implementation(libs.firebase.storage)
+     implementation(libs.play.services.auth)
+     implementation(libs.multidex)
+ 
++    implementation(libs.glide)
++    annotationProcessor(libs.compiler)
++
+     implementation(libs.material.v1110)
+ }
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Okmányirodai Ügyintéző Felület</string>\r\n    <string name=\"login_text\">Bejelentkezés</string>\r\n    <string name=\"password_text\">Jelszó</string>\r\n    <string name=\"register_text\">Regisztráció</string>\r\n    <string name=\"not_registered_text\">Nincs még fiókja?</string>\r\n    <string name=\"password_confirm_text\">Jelszó megerősítése</string>\r\n    <string name=\"full_name_text\">Teljes név</string>\r\n    <string name=\"phone_number_text\">Telefonszám</string>\r\n    <string name=\"email_address_text\">E-mail cím</string>\r\n    <string name=\"address_text\">Lakcím</string>\r\n    <string name=\"cancel_text\">Vissza</string>\r\n    <string name=\"reservation_title\">Foglaljon időpontot a következő ügyek intézésére</string>\r\n    <string name=\"calendar_photo\">Naptár kép</string>\r\n    <string name=\"task1\">Személyi igazolvány cseréje</string>\r\n    <string name=\"task2\">Vezetői engedély cseréje</string>\r\n    <string name=\"task3\">Forgalmi engedély cseréje</string>\r\n    <string name=\"task4\">Lakcímváltozás bejelentése</string>\r\n    <string name=\"task5\">Útlevél kiadása, pótlása</string>\r\n    <string name=\"input_info_text\">Adja meg az adatait</string>\r\n    <string name=\"logout_text\">Kijelentkezés</string>\r\n    <!-- TODO: Remove or change this placeholder text -->\r\n    <string name=\"hello_blank_fragment\">Hello blank fragment</string>\r\n    <string name=\"userdetails_string\">Profiladatok</string>\r\n    <string name=\"modify_string\">Módosítás</string>\r\n    <string name=\"reserve_task_string\">Időpont foglalása</string>\r\n    <string name=\"task_todo_string\">Intézendő ügy</string>\r\n    <string name=\"reserve_text\">Foglalás</string>\r\n    <string name=\"office\">Okmányiroda</string>\r\n    <string name=\"date\">Dátum</string>\r\n    <string name=\"no_bookings_string\">Itt jelennek meg a foglalásai</string>\r\n    <string name=\"delete_string\">Törlés</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/res/values/strings.xml	(date 1747340472048)
+@@ -30,4 +30,5 @@
+     <string name="date">Dátum</string>
+     <string name="no_bookings_string">Itt jelennek meg a foglalásai</string>
+     <string name="delete_string">Törlés</string>
++    <string name="notification">Értesítés 5 órával előtte</string>
+ </resources>
+\ No newline at end of file
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.9.2\"\r\nfirebaseBom = \"33.12.0\"\r\nfirebaseFirestore = \"25.1.3\"\r\nfirebaseFirestoreVersion = \"25.1.3\"\r\ngradle = \"7.4.2\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.2.1\"\r\nespressoCore = \"3.6.1\"\r\nappcompat = \"1.7.0\"\r\nmaterial = \"1.12.0\"\r\nactivity = \"1.10.1\"\r\nconstraintlayout = \"2.2.1\"\r\nmaterialVersion = \"1.12.0\"\r\nmultidex = \"1.0.3\"\r\nplayServicesAuth = \"21.3.0\"\r\n\r\n[libraries]\r\nfirebase-analytics = { module = \"com.google.firebase:firebase-analytics\" }\r\nfirebase-auth = { module = \"com.google.firebase:firebase-auth\" }\r\nfirebase-bom = { module = \"com.google.firebase:firebase-bom\", version.ref = \"firebaseBom\" }\r\nfirebase-firestore = { module = \"com.google.firebase:firebase-firestore\", version.ref = \"firebaseFirestore\" }\r\nfirebase-firestore-v24111 = { module = \"com.google.firebase:firebase-firestore\", version.ref = \"firebaseFirestoreVersion\" }\r\ngradle = { module = \"com.android.tools.build:gradle\", version.ref = \"gradle\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\next-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nespresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nappcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nactivity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\r\nconstraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\r\nmaterial-v1110 = { module = \"com.google.android.material:material\", version.ref = \"materialVersion\" }\r\nmultidex = { module = \"com.android.support:multidex\", version.ref = \"multidex\" }\r\nplay-services-auth = { module = \"com.google.android.gms:play-services-auth\", version.ref = \"playServicesAuth\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/gradle/libs.versions.toml	(date 1747332518795)
+@@ -1,8 +1,12 @@
+ [versions]
+ agp = "8.9.2"
++compiler = "4.16.0"
+ firebaseBom = "33.12.0"
+ firebaseFirestore = "25.1.3"
+ firebaseFirestoreVersion = "25.1.3"
++firebaseStorage = "21.0.1"
++fragment = "1.8.6"
++glide = "4.16.0"
+ gradle = "7.4.2"
+ junit = "4.13.2"
+ junitVersion = "1.2.1"
+@@ -14,13 +18,18 @@
+ materialVersion = "1.12.0"
+ multidex = "1.0.3"
+ playServicesAuth = "21.3.0"
++lifecycleViewmodelAndroid = "2.9.0"
+ 
+ [libraries]
++compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
+ firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+ firebase-auth = { module = "com.google.firebase:firebase-auth" }
+ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+ firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
+ firebase-firestore-v24111 = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestoreVersion" }
++firebase-storage = { module = "com.google.firebase:firebase-storage", version.ref = "firebaseStorage" }
++fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
++glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+ gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+ junit = { group = "junit", name = "junit", version.ref = "junit" }
+ ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+@@ -32,6 +41,7 @@
+ material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+ multidex = { module = "com.android.support:multidex", version.ref = "multidex" }
+ play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
++lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleViewmodelAndroid" }
+ 
+ [plugins]
+ android-application = { id = "com.android.application", version.ref = "agp" }
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/EventReminderReceiver.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/EventReminderReceiver.java b/app/src/main/java/com/example/okmanyirodaugyintezes/EventReminderReceiver.java
+new file mode 100644
+--- /dev/null	(date 1747337879216)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/EventReminderReceiver.java	(date 1747337879216)
+@@ -0,0 +1,35 @@
++package com.example.okmanyirodaugyintezes;
++
++import android.app.NotificationChannel;
++import android.app.NotificationManager;
++import android.content.BroadcastReceiver;
++import android.content.Context;
++import android.content.Intent;
++import android.os.Build;
++
++import androidx.core.app.NotificationCompat;
++
++public class EventReminderReceiver extends BroadcastReceiver {
++    @Override
++    public void onReceive(Context context, Intent intent) {
++        String title = intent.getStringExtra("title");
++        String description = intent.getStringExtra("description");
++
++        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
++        String channelId = "event_reminder_channel";
++
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
++            NotificationChannel channel = new NotificationChannel(channelId, "Foglalás emlékeztetők", NotificationManager.IMPORTANCE_HIGH);
++            notificationManager.createNotificationChannel(channel);
++        }
++
++        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId)
++                .setSmallIcon(R.drawable.notification)
++                .setContentTitle(title)
++                .setContentText(description)
++                .setPriority(NotificationCompat.PRIORITY_HIGH)
++                .setAutoCancel(true);
++
++        notificationManager.notify((int) System.currentTimeMillis(), builder.build());
++    }
++}
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/ReservationFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\nimport android.animation.ObjectAnimator;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\npublic class ReservationFragment extends Fragment {\r\n    // CONSTS\r\n    private static final String LOG_TAG = ReservationFragment.class.getName();\r\n    private static final String ARG_USER = \"user\";\r\n\r\n    // GLOBAL VARIABLES\r\n    private UserDetails userDetails;\r\n\r\n    public ReservationFragment() {\r\n        super(R.layout.fragment_reservation);\r\n    }\r\n\r\n    // GET ARGUMENTS FROM ACTIVITY\r\n    public static ReservationFragment newInstance(UserDetails user) {\r\n        ReservationFragment fragment = new ReservationFragment();\r\n        Bundle args = new Bundle();\r\n        args.putSerializable(ARG_USER, user);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);\r\n            Log.d(LOG_TAG, \"User sikeresen lekérve\");\r\n        }\r\n    }\r\n\r\n    // MAKING CHANGES ON UI\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        Button button1 = view.findViewById(R.id.button1);\r\n        Button button2 = view.findViewById(R.id.button2);\r\n        Button button3 = view.findViewById(R.id.button3);\r\n        Button button4 = view.findViewById(R.id.button4);\r\n        Button button5 = view.findViewById(R.id.button5);\r\n        TextView fullNameTextView = view.findViewById(R.id.fullNameTextView);\r\n\r\n        // SHOW FULL NAME ON LOAD\r\n        if (userDetails != null) {fullNameTextView.setText(userDetails.getFullName());}\r\n\r\n        // SHAKE ANIMATION ON LOAD\r\n        ImageView calendarImageView = view.findViewById(R.id.calendar);\r\n        ObjectAnimator animator = ObjectAnimator.ofFloat(calendarImageView, \"rotation\", 0f, 10f, -10f, 5f, -5f, 0f);\r\n        animator.setDuration(1200);\r\n        animator.start();\r\n\r\n        // PASS THE TASK TO CHECKOUT ACTIVITY\r\n        View.OnClickListener buttonClickListener = v -> {\r\n            if (v instanceof Button) {\r\n                String selectedText = ((Button) v).getText().toString();\r\n\r\n                Intent intent = new Intent(getActivity(), CheckoutActivity.class);\r\n                intent.putExtra(\"task\", selectedText);\r\n                startActivity(intent);\r\n            }\r\n        };\r\n\r\n        button1.setOnClickListener(buttonClickListener);\r\n        button2.setOnClickListener(buttonClickListener);\r\n        button3.setOnClickListener(buttonClickListener);\r\n        button4.setOnClickListener(buttonClickListener);\r\n        button5.setOnClickListener(buttonClickListener);\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {\r\n        return inflater.inflate(R.layout.fragment_reservation, container, false);\r\n    }\r\n\r\n    @Override\r\n    public void onSaveInstanceState(@NonNull Bundle outState) {\r\n        super.onSaveInstanceState(outState);\r\n        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed\r\n    }\r\n\r\n    @Override\r\n    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {\r\n        super.onViewStateRestored(savedInstanceState);\r\n        if (savedInstanceState != null) {\r\n            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/ReservationFragment.java b/app/src/main/java/com/example/okmanyirodaugyintezes/ReservationFragment.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/ReservationFragment.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/ReservationFragment.java	(date 1747340949128)
+@@ -7,8 +7,8 @@
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.fragment.app.Fragment;
++import androidx.lifecycle.ViewModelProvider;
+ 
+-import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+@@ -17,33 +17,19 @@
+ import android.widget.TextView;
+ 
+ public class ReservationFragment extends Fragment {
+-    // CONSTS
+-    private static final String LOG_TAG = ReservationFragment.class.getName();
+-    private static final String ARG_USER = "user";
+-
+     // GLOBAL VARIABLES
+-    private UserDetails userDetails;
++    private UserViewModel userViewModel;
++    private TextView fullNameTextView;
+ 
+     public ReservationFragment() {
+         super(R.layout.fragment_reservation);
+     }
+ 
+     // GET ARGUMENTS FROM ACTIVITY
+-    public static ReservationFragment newInstance(UserDetails user) {
+-        ReservationFragment fragment = new ReservationFragment();
+-        Bundle args = new Bundle();
+-        args.putSerializable(ARG_USER, user);
+-        fragment.setArguments(args);
+-        return fragment;
+-    }
+-
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        if (getArguments() != null) {
+-            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);
+-            Log.d(LOG_TAG, "User sikeresen lekérve");
+-        }
++        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+     }
+ 
+     // MAKING CHANGES ON UI
+@@ -56,10 +42,10 @@
+         Button button3 = view.findViewById(R.id.button3);
+         Button button4 = view.findViewById(R.id.button4);
+         Button button5 = view.findViewById(R.id.button5);
+-        TextView fullNameTextView = view.findViewById(R.id.fullNameTextView);
++        fullNameTextView = view.findViewById(R.id.fullNameTextView);
+ 
+         // SHOW FULL NAME ON LOAD
+-        if (userDetails != null) {fullNameTextView.setText(userDetails.getFullName());}
++        userViewModel.getUserDetails().observe(getViewLifecycleOwner(), userDetails -> fullNameTextView.setText(userDetails.getFullName()));
+ 
+         // SHAKE ANIMATION ON LOAD
+         ImageView calendarImageView = view.findViewById(R.id.calendar);
+@@ -89,18 +75,4 @@
+     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+         return inflater.inflate(R.layout.fragment_reservation, container, false);
+     }
+-
+-    @Override
+-    public void onSaveInstanceState(@NonNull Bundle outState) {
+-        super.onSaveInstanceState(outState);
+-        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed
+-    }
+-
+-    @Override
+-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+-        super.onViewStateRestored(savedInstanceState);
+-        if (savedInstanceState != null) {
+-            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it
+-        }
+-    }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout-land/activity_checkout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout-land/activity_checkout.xml b/app/src/main/res/layout-land/activity_checkout.xml
+new file mode 100644
+--- /dev/null	(date 1747337006139)
++++ b/app/src/main/res/layout-land/activity_checkout.xml	(date 1747337006139)
+@@ -0,0 +1,260 @@
++<?xml version="1.0" encoding="utf-8"?>
++<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:fillViewport="true">
++
++    <androidx.constraintlayout.widget.ConstraintLayout
++        xmlns:app="http://schemas.android.com/apk/res-auto"
++        xmlns:tools="http://schemas.android.com/tools"
++        android:id="@+id/main"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:background="?attr/colorPrimary"
++        tools:context=".CheckoutActivity">
++
++        <androidx.constraintlayout.widget.Guideline
++            android:id="@+id/topGuideline"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            app:layout_constraintGuide_percent="0.1" />
++
++        <androidx.constraintlayout.widget.Guideline
++            android:id="@+id/bottomGuideline"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            app:layout_constraintGuide_percent="0.9" />
++
++        <ImageView
++            android:id="@+id/cancelImageView"
++            android:layout_width="@dimen/min_height"
++            android:layout_height="@dimen/min_height"
++            android:layout_marginStart="@dimen/small_margin"
++            android:background="@drawable/back_arrow"
++            android:backgroundTint="?attr/backgroundColor"
++            android:contentDescription="@string/cancel_text"
++            android:gravity="center"
++            android:minHeight="@dimen/min_height"
++            android:onClick="cancel"
++            app:layout_constraintBottom_toTopOf="@id/topGuideline"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent" />
++
++        <TextView
++            android:id="@+id/taskTitle"
++            android:layout_width="match_parent"
++            android:layout_height="@dimen/min_height"
++            android:text="@string/reserve_task_string"
++            android:textAlignment="center"
++            android:textColor="?attr/backgroundColor"
++            android:textSize="@dimen/title_text_size"
++            android:textStyle="bold"
++            app:layout_constraintBottom_toTopOf="@id/topGuideline"
++            app:layout_constraintTop_toTopOf="parent" />
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="0dp"
++            android:background="?attr/backgroundColor"
++            android:orientation="vertical"
++            app:layout_constraintBottom_toTopOf="@id/bottomGuideline"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@id/topGuideline">
++
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="0.5" />
++
++            <androidx.constraintlayout.widget.ConstraintLayout
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content">
++
++                <RelativeLayout
++                    android:id="@+id/firstleft"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    app:layout_constraintStart_toStartOf="parent"
++                    app:layout_constraintEnd_toStartOf="@+id/firstright"
++                    app:layout_constraintTop_toTopOf="parent">
++
++                    <TextView
++                        android:id="@+id/taskTodoTextView"
++                        android:layout_width="300dp"
++                        android:layout_height="@dimen/min_height"
++                        android:text="@string/task_todo_string"
++                        android:gravity="start|center"
++                        android:textColor="?attr/colorPrimary"
++                        android:textSize="@dimen/normal_text_size" />
++
++                    <TextView
++                        android:id="@+id/taskTextView"
++                        android:layout_width="300dp"
++                        android:layout_height="wrap_content"
++                        android:layout_below="@id/taskTodoTextView"
++                        android:minHeight="@dimen/min_height"
++                        android:gravity="start|center"
++                        android:paddingStart="@dimen/basic_margin"
++                        android:paddingEnd="@dimen/basic_margin"
++                        android:textColor="?attr/colorSecondary"
++                        android:textSize="@dimen/normal_text_size"
++                        android:textStyle="bold" />
++
++                </RelativeLayout>
++
++                <RelativeLayout
++                    android:id="@+id/firstright"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    app:layout_constraintEnd_toEndOf="parent"
++                    app:layout_constraintStart_toEndOf="@+id/firstleft"
++                    app:layout_constraintTop_toTopOf="parent">
++
++                    <TextView
++                        android:id="@+id/officeTextView"
++                        android:layout_width="300dp"
++                        android:layout_height="@dimen/min_height"
++                        android:text="@string/office"
++                        android:gravity="start|center"
++                        android:textColor="?attr/colorPrimary"
++                        android:textSize="@dimen/normal_text_size" />
++
++                    <Spinner
++                        android:id="@+id/officeSpinner"
++                        android:layout_width="300dp"
++                        android:layout_height="wrap_content"
++                        android:layout_below="@id/officeTextView"
++                        android:minHeight="@dimen/min_height"
++                        android:textColor="?attr/colorSecondary"
++                        android:textSize="@dimen/normal_text_size"
++                        android:textStyle="bold"
++                        android:background="@drawable/spinner_background"/>
++
++                    <TextView
++                        android:id="@+id/officeAddressTextView"
++                        android:layout_width="300dp"
++                        android:layout_height="wrap_content"
++                        android:minHeight="@dimen/min_height"
++                        android:gravity="start|center"
++                        android:layout_below="@id/officeSpinner"
++                        android:textColor="?attr/colorSecondary"
++                        android:textSize="@dimen/normal_text_size" />
++
++                </RelativeLayout>
++
++            </androidx.constraintlayout.widget.ConstraintLayout>
++
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="1" />
++
++            <androidx.constraintlayout.widget.ConstraintLayout
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content">
++
++                <RelativeLayout
++                    android:id="@+id/secondleft"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    app:layout_constraintStart_toStartOf="parent"
++                    app:layout_constraintTop_toTopOf="parent"
++                    app:layout_constraintEnd_toStartOf="@+id/secondright">
++
++                    <TextView
++                        android:id="@+id/dateEditText"
++                        android:layout_width="300dp"
++                        android:layout_height="@dimen/min_height"
++                        android:text="@string/date"
++                        android:gravity="start|center"
++                        android:textColor="?attr/colorPrimary"
++                        android:textSize="@dimen/normal_text_size" />
++
++                    <EditText
++                        android:id="@+id/datePicker"
++                        android:layout_width="300dp"
++                        android:layout_height="wrap_content"
++                        android:autofillHints=""
++                        android:inputType="date"
++                        android:minHeight="@dimen/min_height"
++                        android:clickable="true"
++                        android:focusable="false"
++                        android:textColorHint="?attr/hintTextColor"
++                        android:textColor="?attr/colorSecondary"
++                        android:textSize="@dimen/normal_text_size"
++                        android:textStyle="bold"
++                        android:paddingStart="@dimen/basic_margin"
++                        android:paddingEnd="@dimen/basic_margin"
++                        android:background="@drawable/spinner_background"
++                        android:drawableEnd="@android:drawable/ic_menu_my_calendar"
++                        android:layout_below="@id/dateEditText"/>
++
++                </RelativeLayout>
++
++                <RelativeLayout
++                    android:id="@+id/secondright"
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    app:layout_constraintEnd_toEndOf="parent"
++                    app:layout_constraintStart_toEndOf="@+id/secondleft"
++                    app:layout_constraintTop_toTopOf="parent">
++
++                    <TextView
++                        android:id="@+id/timeTextView"
++                        android:layout_width="300dp"
++                        android:layout_height="@dimen/min_height"
++                        android:text="Időpont"
++                        android:gravity="start|center"
++                        android:textColor="?attr/colorPrimary"
++                        android:textSize="@dimen/normal_text_size" />
++
++                    <Spinner
++                        android:id="@+id/timeSpinner"
++                        android:layout_width="300dp"
++                        android:layout_height="wrap_content"
++                        android:layout_below="@id/timeTextView"
++                        android:minHeight="@dimen/min_height"
++                        android:textColor="?attr/colorSecondary"
++                        android:textSize="@dimen/normal_text_size"
++                        android:textStyle="bold"
++                        android:background="@drawable/spinner_background"/>
++
++                    <TextView
++                        android:id="@+id/availableTextView"
++                        android:layout_width="300dp"
++                        android:layout_height="wrap_content"
++                        android:minHeight="@dimen/min_height"
++                        android:gravity="start|center"
++                        android:layout_below="@id/timeSpinner"
++                        android:textColor="?attr/colorSecondary"
++                        android:textSize="@dimen/normal_text_size" />
++
++                </RelativeLayout>
++            </androidx.constraintlayout.widget.ConstraintLayout>
++
++            <Space
++                android:layout_width="0dp"
++                android:layout_height="0dp"
++                android:layout_weight="1" />
++
++        </LinearLayout>
++
++        <Button
++            android:id="@+id/insertButton"
++            android:layout_width="@dimen/login_field_margin"
++            android:layout_height="@dimen/min_height"
++            android:backgroundTint="?attr/backgroundColor"
++            android:text="@string/reserve_text"
++            android:textColor="?attr/colorPrimary"
++            android:textSize="@dimen/normal_text_size"
++            android:onClick="insertReservation"
++            app:layout_constraintBottom_toBottomOf="parent"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@id/bottomGuideline" />
++
++    </androidx.constraintlayout.widget.ConstraintLayout>
++</ScrollView>
+\ No newline at end of file
+Index: app/src/main/res/layout-land/fragment_booked.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout-land/fragment_booked.xml b/app/src/main/res/layout-land/fragment_booked.xml
+new file mode 100644
+--- /dev/null	(date 1747334531264)
++++ b/app/src/main/res/layout-land/fragment_booked.xml	(date 1747334531264)
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="utf-8"?>
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".BookedFragment">
++
++    <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/recycler_view"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent" />
++
++    <ProgressBar
++        android:id="@+id/progressBar"
++        android:layout_width="48dp"
++        android:layout_height="48dp"
++        android:layout_gravity="center"
++        android:visibility="gone"/>
++
++    <TextView
++        android:id="@+id/emptyTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_gravity="center"
++        android:text="@string/no_bookings_string"
++        android:visibility="gone"
++        android:textSize="@dimen/title_text_size"
++        android:textColor="?attr/colorSecondary"
++        android:textStyle="bold"/>
++
++</FrameLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/BookedFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.TextView;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.auth.User;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Objects;\r\n\r\npublic class BookedFragment extends Fragment {\r\n    // CONSTS\r\n    private static final String LOG_TAG = BookedFragment.class.getName();\r\n    private static final String ARG_USER = \"user\";\r\n\r\n    // GLOBAL VARIABLES\r\n    private TextView emptyTextView;\r\n    private ProgressBar progressBar;\r\n    private List<BookingDetails> bookings;\r\n    private BookingAdapter adapter;\r\n    private FirebaseFirestore db;\r\n    private FirebaseUser user;\r\n    RecyclerView recyclerView;\r\n    private UserDetails userDetails;\r\n\r\n    public BookedFragment() {\r\n        super(R.layout.fragment_booked);\r\n    }\r\n\r\n    // GET ARGUMENTS FROM ACTIVITY\r\n    public static BookedFragment newInstance(UserDetails userDetails) {\r\n        BookedFragment fragment = new BookedFragment();\r\n        Bundle args = new Bundle();\r\n        args.putSerializable(ARG_USER, userDetails);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);\r\n        }\r\n    }\r\n\r\n    // MAKING CHANGES ON UI\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        // init\r\n        emptyTextView = view.findViewById(R.id.emptyTextView);\r\n        progressBar = view.findViewById(R.id.progressBar);\r\n        db = FirebaseFirestore.getInstance();\r\n        FirebaseAuth auth = FirebaseAuth.getInstance();\r\n        user = auth.getCurrentUser();\r\n        bookings = new ArrayList<>();\r\n        recyclerView = view.findViewById(R.id.recycler_view);\r\n\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));\r\n        adapter = new BookingAdapter(bookings, this::deleteBooking);\r\n        recyclerView.setAdapter(adapter);\r\n\r\n        fetchUserBookings();\r\n    }\r\n\r\n    // FETCH USER'S BOOKINGS FROM FIRESTORE BASED ON EMAIL\r\n    private void fetchUserBookings(){\r\n        progressBar.setVisibility(View.VISIBLE);\r\n        db.collection(\"bookings\")\r\n                .whereEqualTo(\"email\", user.getEmail())\r\n                .get()\r\n                .addOnSuccessListener(querySnapshot -> {\r\n\r\n                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {\r\n                        String task = doc.getString(\"task\");\r\n                        String date = doc.getString(\"date\");\r\n                        String time = doc.getString(\"time\");\r\n                        String office_id = doc.getString(\"office_id\");\r\n\r\n                        fetchOffice(office_id, officeDetails -> {\r\n                            BookingDetails booking = new BookingDetails(task, date, time, officeDetails);\r\n                            bookings.add(booking);\r\n                            adapter.notifyItemInserted(bookings.size() - 1);\r\n\r\n                            emptyTextView.setVisibility(View.GONE);\r\n                            Log.d(LOG_TAG, \"Időpontok betöltése sikeres\");\r\n                        });\r\n                    }\r\n                    progressBar.setVisibility(View.GONE);\r\n\r\n                })\r\n                .addOnFailureListener(e -> {\r\n                    progressBar.setVisibility(View.GONE);\r\n                    Log.d(LOG_TAG, \"Nem sikerült betölteni a foglalásokat\");\r\n                });\r\n    }\r\n\r\n    // FETCH OFFICE DETAILS\r\n    public interface OfficeFetchCallback { void onOfficeFetched(OfficeDetails officeDetails);}\r\n    private void fetchOffice(String office_id, OfficeFetchCallback callback){\r\n        db.collection(\"offices\").document(office_id).get().addOnSuccessListener(officeDoc -> {\r\n            String office = officeDoc.getString(\"office\");\r\n            String address = officeDoc.getString(\"address\");\r\n            OfficeDetails officeDetails = new OfficeDetails(office_id, office, address);\r\n            callback.onOfficeFetched(officeDetails);\r\n        });\r\n    }\r\n\r\n    // DELETE BOOKING\r\n    private void deleteBooking(BookingDetails booking, int position) {\r\n        db.collection(\"bookings\")\r\n                .whereEqualTo(\"email\", user.getEmail())\r\n                .whereEqualTo(\"task\", booking.getTask())\r\n                .whereEqualTo(\"date\", booking.getDate())\r\n                .whereEqualTo(\"time\", booking.getTime())\r\n                .whereEqualTo(\"office_id\", booking.getOffice().getOfficeID())\r\n                .get()\r\n                .addOnSuccessListener(querySnapshot -> {\r\n                    for (DocumentSnapshot document : querySnapshot.getDocuments()) {\r\n                        db.collection(\"bookings\").document(document.getId()).delete()\r\n                                .addOnSuccessListener(aVoid -> {\r\n                                    View viewToAnimate = Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(position)).itemView;\r\n                                    viewToAnimate.animate()\r\n                                            .translationX(viewToAnimate.getWidth())\r\n                                            .alpha(0)\r\n                                            .setDuration(300)\r\n                                            .withEndAction(() -> {\r\n                                                if(position >= 0 && position < bookings.size()){\r\n                                                    bookings.remove(position);\r\n                                                    adapter.notifyItemRemoved(position);\r\n                                                    if (bookings.isEmpty()) {\r\n                                                        emptyTextView.setVisibility(View.VISIBLE);\r\n                                                    }\r\n                                                    Log.d(LOG_TAG, \"Foglalás sikeresen törölve\");\r\n                                                }\r\n                                            })\r\n                                            .start();\r\n                                })\r\n                                .addOnFailureListener(e -> Log.d(LOG_TAG, \"Foglalás törlése sikertelen\"));\r\n                    }\r\n                })\r\n                .addOnFailureListener(e -> Log.d(LOG_TAG, \"Nem találtuk a törölni kívánt foglalást\"));\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {\r\n        return inflater.inflate(R.layout.fragment_booked, container, false);\r\n    }\r\n\r\n    @Override\r\n    public void onSaveInstanceState(@NonNull Bundle outState) {\r\n        super.onSaveInstanceState(outState);\r\n        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed\r\n    }\r\n\r\n    @Override\r\n    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {\r\n        super.onViewStateRestored(savedInstanceState);\r\n        if (savedInstanceState != null) {\r\n            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/BookedFragment.java b/app/src/main/java/com/example/okmanyirodaugyintezes/BookedFragment.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/BookedFragment.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/BookedFragment.java	(date 1747340949104)
+@@ -19,7 +19,6 @@
+ import com.google.firebase.auth.FirebaseUser;
+ import com.google.firebase.firestore.DocumentSnapshot;
+ import com.google.firebase.firestore.FirebaseFirestore;
+-import com.google.firebase.firestore.auth.User;
+ 
+ import java.util.ArrayList;
+ import java.util.List;
+@@ -28,7 +27,6 @@
+ public class BookedFragment extends Fragment {
+     // CONSTS
+     private static final String LOG_TAG = BookedFragment.class.getName();
+-    private static final String ARG_USER = "user";
+ 
+     // GLOBAL VARIABLES
+     private TextView emptyTextView;
+@@ -38,27 +36,15 @@
+     private FirebaseFirestore db;
+     private FirebaseUser user;
+     RecyclerView recyclerView;
+-    private UserDetails userDetails;
+ 
+     public BookedFragment() {
+         super(R.layout.fragment_booked);
+     }
+ 
+     // GET ARGUMENTS FROM ACTIVITY
+-    public static BookedFragment newInstance(UserDetails userDetails) {
+-        BookedFragment fragment = new BookedFragment();
+-        Bundle args = new Bundle();
+-        args.putSerializable(ARG_USER, userDetails);
+-        fragment.setArguments(args);
+-        return fragment;
+-    }
+-
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        if (getArguments() != null) {
+-            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);
+-        }
+     }
+ 
+     // MAKING CHANGES ON UI
+@@ -165,18 +151,4 @@
+     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+         return inflater.inflate(R.layout.fragment_booked, container, false);
+     }
+-
+-    @Override
+-    public void onSaveInstanceState(@NonNull Bundle outState) {
+-        super.onSaveInstanceState(outState);
+-        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed
+-    }
+-
+-    @Override
+-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+-        super.onViewStateRestored(savedInstanceState);
+-        if (savedInstanceState != null) {
+-            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it
+-        }
+-    }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout-land/fragment_reservation.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout-land/fragment_reservation.xml b/app/src/main/res/layout-land/fragment_reservation.xml
+new file mode 100644
+--- /dev/null	(date 1747334923800)
++++ b/app/src/main/res/layout-land/fragment_reservation.xml	(date 1747334923800)
+@@ -0,0 +1,199 @@
++<?xml version="1.0" encoding="utf-8"?>
++<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
++xmlns:app="http://schemas.android.com/apk/res-auto"
++xmlns:tools="http://schemas.android.com/tools"
++android:layout_width="match_parent"
++android:layout_height="match_parent"
++android:fillViewport="true">
++
++<androidx.constraintlayout.widget.ConstraintLayout
++    android:id="@+id/main"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:background="?attr/backgroundColor"
++    android:scrollbars="vertical">
++
++    <ImageView
++        android:id="@+id/signOutImageView"
++        android:layout_width="@dimen/min_height"
++        android:layout_height="@dimen/min_height"
++        android:minHeight="@dimen/min_height"
++        android:layout_margin="@dimen/small_margin"
++        android:contentDescription="@string/logout_text"
++        android:gravity="center"
++        android:onClick="signOut"
++        android:background="@drawable/logout_icon"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/fullNameTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:minHeight="@dimen/min_height"
++        android:gravity="center"
++        android:layout_margin="@dimen/small_margin"
++        android:textColor="?attr/colorSecondary"
++        android:textSize="@dimen/normal_text_size"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++
++    <ImageView
++        android:id="@+id/calendar"
++        android:layout_width="180dp"
++        android:layout_height="180dp"
++        android:contentDescription="@string/calendar_photo"
++        app:layout_constraintBottom_toTopOf="@+id/titleTextView"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:srcCompat="@drawable/calendar" />
++
++    <TextView
++        android:id="@+id/titleTextView"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="@dimen/small_margin"
++        android:layout_marginEnd="@dimen/small_margin"
++        android:text="@string/reservation_title"
++        android:textAlignment="center"
++        android:textColor="?attr/colorSecondary"
++        android:textSize="@dimen/title_text_size"
++        android:textStyle="bold"
++        app:layout_constraintBottom_toTopOf="@+id/firstrow"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/calendar"
++        app:layout_constraintVertical_bias="0.471" />
++
++
++
++
++
++    <LinearLayout
++        android:id="@+id/firstrow"
++        android:layout_height="wrap_content"
++        android:layout_width="match_parent"
++        android:orientation="horizontal"
++        android:gravity="center"
++        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
++        app:layout_constraintBottom_toTopOf="@+id/secondrow">
++
++        <Space
++            android:layout_width="0dp"
++            android:layout_height="0dp"
++            android:layout_weight="1" />
++
++        <Button
++            android:id="@+id/button1"
++            android:layout_width="wrap_content"
++            android:minWidth="@dimen/login_button_margin"
++            android:layout_height="wrap_content"
++            android:backgroundTint="?attr/colorPrimary"
++            android:text="@string/task1"
++            android:textSize="@dimen/normal_text_size"
++            android:drawableEnd="@drawable/proceed_arrow"
++            android:textColor="?attr/backgroundColor"
++            android:onClick="goToCheckout" />
++
++        <Space
++            android:layout_width="0dp"
++            android:layout_height="0dp"
++            android:layout_weight="1" />
++
++        <Button
++            android:id="@+id/button2"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:minWidth="@dimen/login_button_margin"
++            android:backgroundTint="?attr/colorPrimary"
++            android:text="@string/task2"
++            android:textSize="@dimen/normal_text_size"
++            android:drawableEnd="@drawable/proceed_arrow"
++            android:textColor="?attr/backgroundColor"
++            android:onClick="goToCheckout" />
++
++        <Space
++            android:layout_width="0dp"
++            android:layout_height="0dp"
++            android:layout_weight="1" />
++
++    </LinearLayout>
++
++    <LinearLayout
++        android:id="@+id/secondrow"
++        android:layout_height="wrap_content"
++        android:layout_width="match_parent"
++        android:orientation="horizontal"
++        android:gravity="center"
++        app:layout_constraintTop_toBottomOf="@+id/firstrow"
++        app:layout_constraintBottom_toTopOf="@+id/thirdrow">
++
++        <Space
++            android:layout_width="0dp"
++            android:layout_height="0dp"
++            android:layout_weight="1" />
++
++        <Button
++            android:id="@+id/button3"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:minWidth="@dimen/login_button_margin"
++            android:backgroundTint="?attr/colorPrimary"
++            android:text="@string/task3"
++            android:textSize="@dimen/normal_text_size"
++            android:drawableEnd="@drawable/proceed_arrow"
++            android:textColor="?attr/backgroundColor"
++            android:onClick="goToCheckout" />
++
++        <Space
++            android:layout_width="0dp"
++            android:layout_height="0dp"
++            android:layout_weight="1" />
++
++        <Button
++            android:id="@+id/button4"
++            android:layout_width="wrap_content"
++            android:minWidth="@dimen/login_button_margin"
++            android:layout_height="wrap_content"
++            android:backgroundTint="?attr/colorPrimary"
++            android:text="@string/task4"
++            android:textSize="@dimen/normal_text_size"
++            android:textColor="?attr/backgroundColor"
++            android:drawableEnd="@drawable/proceed_arrow"
++            android:onClick="goToCheckout" />
++
++        <Space
++            android:layout_width="0dp"
++            android:layout_height="0dp"
++            android:layout_weight="1" />
++
++    </LinearLayout>
++
++    <LinearLayout
++        android:id="@+id/thirdrow"
++        android:layout_height="wrap_content"
++        android:layout_width="match_parent"
++        android:orientation="horizontal"
++        android:gravity="center"
++        app:layout_constraintTop_toBottomOf="@+id/secondrow"
++        app:layout_constraintBottom_toBottomOf="parent">
++
++        <Button
++            android:id="@+id/button5"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:minWidth="@dimen/login_button_margin"
++            android:minHeight="@dimen/min_height"
++            android:backgroundTint="?attr/colorPrimary"
++            android:text="@string/task5"
++            android:textSize="@dimen/normal_text_size"
++            android:drawableEnd="@drawable/proceed_arrow"
++            android:textColor="?attr/backgroundColor"
++            android:onClick="goToCheckout" />
++
++    </LinearLayout>
++</androidx.constraintlayout.widget.ConstraintLayout>
++</ScrollView>
+\ No newline at end of file
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/UserEditFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\nimport android.graphics.drawable.Drawable;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.view.animation.AlphaAnimation;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.auth.FirebaseUser;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class UserEditFragment extends Fragment {\r\n    // CONSTS\r\n    private static final String LOG_TAG = UserEditFragment.class.getName();\r\n    private static final String ARG_USER = \"user\";\r\n\r\n    // GLOBAL VARIABLES\r\n    private EditText fullNameEditText, phoneNumberEditText, postalAddressEditText;\r\n    private UserDetails userDetails;\r\n    private FirebaseAuth auth;\r\n    private FirebaseFirestore firestore;\r\n    private Button updateButton;\r\n    private ProgressBar updateProgressBar;\r\n\r\n    public UserEditFragment() {\r\n        super(R.layout.fragment_user_edit);\r\n    }\r\n\r\n    // GET ARGUMENTS FROM ACTIVITY\r\n    public static UserEditFragment newInstance(UserDetails userDetails) {\r\n        UserEditFragment fragment = new UserEditFragment();\r\n        Bundle args = new Bundle();\r\n        args.putSerializable(ARG_USER, userDetails);\r\n        fragment.setArguments(args);\r\n        return fragment;\r\n    }\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (getArguments() != null) {\r\n            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);\r\n        }\r\n    }\r\n\r\n    // MAKING CHANGES ON UI\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        fullNameEditText = view.findViewById(R.id.fullNameEditText);\r\n        phoneNumberEditText = view.findViewById(R.id.phoneNumberEditText);\r\n        postalAddressEditText = view.findViewById(R.id.postalAddressEditText);\r\n        updateProgressBar = view.findViewById(R.id.updateProgressBar);\r\n        updateButton = view.findViewById(R.id.updateButton);\r\n        updateButton.setOnClickListener(v -> update());\r\n\r\n        auth = FirebaseAuth.getInstance();\r\n        firestore = FirebaseFirestore.getInstance();\r\n\r\n        // PASS USER DETAILS ON LOAD\r\n        if (userDetails != null) {\r\n            fullNameEditText.setText(userDetails.getFullName());\r\n            phoneNumberEditText.setText(userDetails.getPhoneNumber());\r\n            postalAddressEditText.setText(userDetails.getPostalAddress());\r\n        }\r\n    }\r\n\r\n    // UPDATING USER DETAILS\r\n    private void update() {\r\n        String fullName = fullNameEditText.getText().toString().trim().toLowerCase();\r\n        String phone = phoneNumberEditText.getText().toString().trim();\r\n        String address = postalAddressEditText.getText().toString().trim().toLowerCase();\r\n\r\n        // validity check\r\n        boolean check = true;\r\n        if (!userDetails.isNameValid(fullName)) {\r\n            showErrorWithFadeIn(fullNameEditText, \"Adja meg helyesen a teljes nevét (pl. Nagy Sándor)\");\r\n            Log.e(LOG_TAG, \"Hibás / hiányzó név\");\r\n            check = false;\r\n        }\r\n        if (!userDetails.isPhoneValid(phone)) {\r\n            showErrorWithFadeIn(phoneNumberEditText, \"Adja meg helyesen a telefonszámát (pl. 06207365539)\");\r\n            Log.e(LOG_TAG, \"Hibás / hiányzó telefonszám\");\r\n            check = false;\r\n        }\r\n        if (address.isEmpty()) {\r\n            showErrorWithFadeIn(postalAddressEditText, \"Adja meg a lakcímét\");\r\n            Log.e(LOG_TAG, \"Hiányzó lakcím\");\r\n            check = false;\r\n        }\r\n\r\n        FirebaseUser user = auth.getCurrentUser();\r\n        if (user == null) {\r\n            Log.d(LOG_TAG, \"Nincs bejelentkezve a felhasználó.\");\r\n            return;\r\n        }\r\n        if(check){\r\n            updateProgressBar.setVisibility(View.VISIBLE);\r\n            updateProgressBar.setEnabled(false);\r\n\r\n            String userId = user.getUid();\r\n            Map<String, Object> userMap = new HashMap<>();\r\n            userMap.put(\"fullName\", userDetails.reformatString(fullName));\r\n            userMap.put(\"phone\", phone);\r\n            userMap.put(\"address\", userDetails.reformatString(address));\r\n\r\n            firestore.collection(\"users\").document(userId)\r\n                    .update(userMap)\r\n                    .addOnSuccessListener(aVoid -> {\r\n                        updateProgressBar.setVisibility(View.GONE);\r\n                        updateButton.setEnabled(true);\r\n\r\n                        userDetails.setFullName(userDetails.reformatString(fullName));\r\n                        userDetails.setPhoneNumber(phone);\r\n                        userDetails.setPostalAddress(userDetails.reformatString(address));\r\n\r\n                        Log.d(LOG_TAG, \"Felhasználó sikeresen módosítva.\");\r\n                        Toast.makeText(getContext(), \"Sikeres módosítás!\", Toast.LENGTH_SHORT).show();\r\n                    })\r\n                    .addOnFailureListener(e -> {\r\n                        updateProgressBar.setVisibility(View.GONE);\r\n                        updateButton.setEnabled(true);\r\n                        Log.d(LOG_TAG, \"Sikertelen módosítás\" + e.getMessage());\r\n                        Toast.makeText(getContext(), \"Sikertelen módosítás\", Toast.LENGTH_SHORT).show();\r\n                    });\r\n        }\r\n        else{\r\n            Log.d(LOG_TAG, \"Rossz input\");\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {\r\n        return inflater.inflate(R.layout.fragment_user_edit, container, false);\r\n    }\r\n\r\n    // EditText Invalid Input Fade-In Animation\r\n    private void showErrorWithFadeIn(EditText editText, String errorMsg) {\r\n        Drawable errorIcon = ContextCompat.getDrawable(requireContext(), R.drawable.error_icon);\r\n        if (errorIcon != null) {\r\n            errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());\r\n        }\r\n        editText.setError(errorMsg, errorIcon);\r\n\r\n        AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);\r\n        fadeIn.setDuration(500);\r\n        fadeIn.setFillAfter(true);\r\n\r\n        editText.startAnimation(fadeIn);\r\n    }\r\n\r\n    @Override\r\n    public void onSaveInstanceState(@NonNull Bundle outState) {\r\n        super.onSaveInstanceState(outState);\r\n        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed\r\n    }\r\n\r\n    @Override\r\n    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {\r\n        super.onViewStateRestored(savedInstanceState);\r\n        if (savedInstanceState != null) {\r\n            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/UserEditFragment.java b/app/src/main/java/com/example/okmanyirodaugyintezes/UserEditFragment.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/UserEditFragment.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/UserEditFragment.java	(date 1747334923810)
+@@ -7,6 +7,7 @@
+ import androidx.annotation.Nullable;
+ import androidx.core.content.ContextCompat;
+ import androidx.fragment.app.Fragment;
++import androidx.lifecycle.ViewModelProvider;
+ 
+ import android.util.Log;
+ import android.view.LayoutInflater;
+@@ -28,11 +29,11 @@
+ public class UserEditFragment extends Fragment {
+     // CONSTS
+     private static final String LOG_TAG = UserEditFragment.class.getName();
+-    private static final String ARG_USER = "user";
+ 
+     // GLOBAL VARIABLES
+     private EditText fullNameEditText, phoneNumberEditText, postalAddressEditText;
+     private UserDetails userDetails;
++    private UserViewModel userViewModel;
+     private FirebaseAuth auth;
+     private FirebaseFirestore firestore;
+     private Button updateButton;
+@@ -43,20 +44,10 @@
+     }
+ 
+     // GET ARGUMENTS FROM ACTIVITY
+-    public static UserEditFragment newInstance(UserDetails userDetails) {
+-        UserEditFragment fragment = new UserEditFragment();
+-        Bundle args = new Bundle();
+-        args.putSerializable(ARG_USER, userDetails);
+-        fragment.setArguments(args);
+-        return fragment;
+-    }
+-
+     @Override
+     public void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+-        if (getArguments() != null) {
+-            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);
+-        }
++        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+     }
+ 
+     // MAKING CHANGES ON UI
+@@ -75,11 +66,14 @@
+         firestore = FirebaseFirestore.getInstance();
+ 
+         // PASS USER DETAILS ON LOAD
+-        if (userDetails != null) {
+-            fullNameEditText.setText(userDetails.getFullName());
+-            phoneNumberEditText.setText(userDetails.getPhoneNumber());
+-            postalAddressEditText.setText(userDetails.getPostalAddress());
+-        }
++        userViewModel.getUserDetails().observe(getViewLifecycleOwner(), userDetails -> {
++            if (userDetails != null) {
++                this.userDetails = new UserDetails(userDetails);
++                fullNameEditText.setText(userDetails.getFullName());
++                phoneNumberEditText.setText(userDetails.getPhoneNumber());
++                postalAddressEditText.setText(userDetails.getPostalAddress());
++            }
++        });
+     }
+ 
+     // UPDATING USER DETAILS
+@@ -165,19 +159,4 @@
+ 
+         editText.startAnimation(fadeIn);
+     }
+-
+-    @Override
+-    public void onSaveInstanceState(@NonNull Bundle outState) {
+-        super.onSaveInstanceState(outState);
+-        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed
+-    }
+-
+-    @Override
+-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+-        super.onViewStateRestored(savedInstanceState);
+-        if (savedInstanceState != null) {
+-            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it
+-        }
+-    }
+-
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/UserDetails.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\nimport android.graphics.drawable.Drawable;\r\nimport android.view.animation.AlphaAnimation;\r\nimport android.widget.EditText;\r\n\r\nimport androidx.core.content.ContextCompat;\r\n\r\nimport java.io.Serializable;\r\n\r\npublic class UserDetails implements Serializable {\r\n    private String FullName, PhoneNumber, PostalAddress;\r\n\r\n    public UserDetails(String FullName, String PhoneNumber, String PostalAddress){\r\n        this.FullName = FullName;\r\n        this.PhoneNumber = PhoneNumber;\r\n        this.PostalAddress = PostalAddress;\r\n    }\r\n\r\n    // GETTER SETTER\r\n    public String getFullName() {\r\n        return FullName;\r\n    }\r\n\r\n    public void setFullName(String fullName) {\r\n        FullName = fullName;\r\n    }\r\n\r\n    public String getPostalAddress() {\r\n        return PostalAddress;\r\n    }\r\n\r\n    public void setPostalAddress(String postalAddress) {\r\n        PostalAddress = postalAddress;\r\n    }\r\n\r\n    public String getPhoneNumber() {\r\n        return PhoneNumber;\r\n    }\r\n\r\n    public void setPhoneNumber(String phoneNumber) {\r\n        PhoneNumber = phoneNumber;\r\n    }\r\n\r\n\r\n    // USER INPUT VALIDITY CHECK METHODS\r\n    public boolean isPhoneValid(String phone) {\r\n        return phone != null && !phone.isEmpty() &&\r\n                phone.matches(\"^[+]?[0-9]{10,15}$\");\r\n    }\r\n\r\n    public boolean isNameValid(String name) {\r\n        return name != null && !name.trim().isEmpty() &&\r\n                name.matches(\"^(?=.*\\\\s)[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű\\\\s'-]{2,50}$\");\r\n    }\r\n\r\n    public String reformatString(String fullName) {\r\n        StringBuilder result = new StringBuilder();\r\n        String[] splitName = fullName.split(\" \");\r\n        for (String name : splitName) {\r\n            StringBuilder sb = new StringBuilder(name);\r\n            sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));\r\n            result.append(sb).append(\" \");\r\n        }\r\n        return result.toString().trim();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/UserDetails.java b/app/src/main/java/com/example/okmanyirodaugyintezes/UserDetails.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/UserDetails.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/UserDetails.java	(date 1747340949114)
+@@ -1,11 +1,5 @@
+ package com.example.okmanyirodaugyintezes;
+ 
+-import android.graphics.drawable.Drawable;
+-import android.view.animation.AlphaAnimation;
+-import android.widget.EditText;
+-
+-import androidx.core.content.ContextCompat;
+-
+ import java.io.Serializable;
+ 
+ public class UserDetails implements Serializable {
+@@ -17,6 +11,12 @@
+         this.PostalAddress = PostalAddress;
+     }
+ 
++    public UserDetails(UserDetails u){
++        this.FullName = u.getFullName();
++        this.PhoneNumber = u.getPhoneNumber();
++        this.PostalAddress = u.getPostalAddress();
++    }
++
+     // GETTER SETTER
+     public String getFullName() {
+         return FullName;
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.content.res.Resources;\r\nimport android.graphics.drawable.Drawable;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.util.TypedValue;\r\nimport android.view.View;\r\nimport android.view.animation.AlphaAnimation;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\n\r\nimport java.util.Objects;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    // CONSTS\r\n    private static final String LOG_TAG = MainActivity.class.getName();\r\n    private static final String PREF_KEY = Objects.requireNonNull(MainActivity.class.getPackage()).toString();\r\n    private static final int SECRET_KEY = 76;\r\n\r\n\r\n    // GLOBAL VARIABLES\r\n    private EditText emailEditText;\r\n    private EditText passwordEditText;\r\n    private Button loginButton;\r\n    private SharedPreferences preferences;\r\n    private FirebaseAuth Auth;\r\n    private ProgressBar loginProgressBar;\r\n\r\n\r\n    // METHODS\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_main);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        // init\r\n        preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);\r\n        this.emailEditText = findViewById(R.id.emailEditText);\r\n        this.passwordEditText = findViewById(R.id.passwordEditText);\r\n        this.loginProgressBar = findViewById(R.id.loginProgressBar);\r\n        this.loginButton = findViewById(R.id.loginButton);\r\n\r\n        // prepare for authentication\r\n        Auth = FirebaseAuth.getInstance();\r\n\r\n        Log.i(LOG_TAG, \"onCreate\");\r\n    }\r\n\r\n    public void login(View view) {\r\n        String email = emailEditText.getText().toString();\r\n        String password = passwordEditText.getText().toString();\r\n\r\n        // validity check\r\n        boolean checks = true;\r\n        if (email.isEmpty()) {\r\n            showErrorWithFadeIn(emailEditText);\r\n            Log.e(LOG_TAG, \"Kitöltetlen e-mail mező!\");\r\n            checks = false;\r\n        }\r\n        if (password.isEmpty()) {\r\n            showErrorWithFadeIn(passwordEditText);\r\n            Log.e(LOG_TAG, \"Kitöltetlen jelszó mező!\");\r\n            checks = false;\r\n        }\r\n\r\n        // LOG IN WITH FIREBASE\r\n        if (checks) {\r\n            loginProgressBar.setVisibility(View.VISIBLE);\r\n            loginButton.setEnabled(false);\r\n\r\n            Auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {\r\n                loginProgressBar.setVisibility(View.GONE);\r\n                loginButton.setEnabled(true);\r\n\r\n                if (task.isSuccessful()) {\r\n                    Log.d(LOG_TAG, \"Sikeres bejelentkezés\");\r\n                    Toast.makeText(MainActivity.this, \"Sikeres bejelentkezés\", Toast.LENGTH_LONG).show();\r\n                    goToMainPage();\r\n                } else {\r\n                    loginProgressBar.setVisibility(View.GONE);\r\n                    loginButton.setEnabled(true);\r\n                    Log.e(LOG_TAG, \"Sikertelen bejelentkezés\");\r\n                    Toast.makeText(MainActivity.this, \"Sikertelen bejelentkezés\", Toast.LENGTH_LONG).show();\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    // EditText Invalid Input Fade-In Animation\r\n    private void showErrorWithFadeIn(EditText editText) {\r\n        Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.error_icon);\r\n        if (errorIcon != null) {\r\n            errorIcon.setBounds(0, 0, errorIcon.getIntrinsicWidth(), errorIcon.getIntrinsicHeight());\r\n        }\r\n        editText.setError(\"Töltsd ki ezt a mezőt\", errorIcon);\r\n\r\n        AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);\r\n        fadeIn.setDuration(500);\r\n        fadeIn.setFillAfter(true);\r\n\r\n        editText.startAnimation(fadeIn);\r\n    }\r\n\r\n    public void register(View view) {\r\n        Intent intent = new Intent(this, RegisterActivity.class);\r\n        intent.putExtra(\"SECRET_KEY\", SECRET_KEY);\r\n        startActivity(intent);\r\n    }\r\n\r\n    private void goToMainPage() {\r\n        Intent intent = new Intent(this, HomeActivity.class);\r\n        startActivity(intent);\r\n    }\r\n\r\n    // Getting theme color\r\n    public static int getThemeColor(Context context, int attrResId) {\r\n        TypedValue typedValue = new TypedValue();\r\n        Resources.Theme theme = context.getTheme();\r\n        theme.resolveAttribute(attrResId, typedValue, true);\r\n        return typedValue.data;\r\n    }\r\n\r\n\r\n    // OVERRIDES\r\n    @Override\r\n    protected void onStop() {\r\n        super.onStop();\r\n        Log.i(LOG_TAG, \"onStop\");\r\n    }\r\n\r\n    @Override\r\n    protected void onStart() {\r\n        super.onStart();\r\n        Log.i(LOG_TAG, \"onStart\");\r\n    }\r\n\r\n    @Override\r\n    protected void onDestroy() {\r\n        super.onDestroy();\r\n        Log.i(LOG_TAG, \"onDestroy\");\r\n    }\r\n\r\n    @Override\r\n    protected void onPause() {\r\n        super.onPause();\r\n\r\n        // pass the saved variables to register activity\r\n        SharedPreferences.Editor editor = preferences.edit();\r\n        editor.putString(\"email\", emailEditText.getText().toString());\r\n        editor.putString(\"password\", passwordEditText.getText().toString());\r\n        editor.apply();\r\n\r\n        Log.i(LOG_TAG, \"onPause\");\r\n    }\r\n\r\n    @Override\r\n    protected void onResume() {\r\n        super.onResume();\r\n        Log.i(LOG_TAG, \"onResume\");\r\n    }\r\n\r\n    @Override\r\n    protected void onRestart() {\r\n        super.onRestart();\r\n        Log.i(LOG_TAG, \"onRestart\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/MainActivity.java b/app/src/main/java/com/example/okmanyirodaugyintezes/MainActivity.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/MainActivity.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/MainActivity.java	(date 1747340949122)
+@@ -1,13 +1,10 @@
+ package com.example.okmanyirodaugyintezes;
+ 
+-import android.content.Context;
+ import android.content.Intent;
+ import android.content.SharedPreferences;
+-import android.content.res.Resources;
+ import android.graphics.drawable.Drawable;
+ import android.os.Bundle;
+ import android.util.Log;
+-import android.util.TypedValue;
+ import android.view.View;
+ import android.view.animation.AlphaAnimation;
+ import android.widget.Button;
+@@ -133,15 +130,6 @@
+         startActivity(intent);
+     }
+ 
+-    // Getting theme color
+-    public static int getThemeColor(Context context, int attrResId) {
+-        TypedValue typedValue = new TypedValue();
+-        Resources.Theme theme = context.getTheme();
+-        theme.resolveAttribute(attrResId, typedValue, true);
+-        return typedValue.data;
+-    }
+-
+-
+     // OVERRIDES
+     @Override
+     protected void onStop() {
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.OkmányirodaÜgyintézés\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".CheckoutActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".HomeActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".RegisterActivity\"\r\n            android:exported=\"false\"\r\n            android:windowSoftInputMode=\"adjustResize\" />\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/AndroidManifest.xml	(date 1747338715473)
+@@ -2,6 +2,9 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+ 
++    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
++    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
++    <uses-permission android:name="android.permission.WAKE_LOCK" />
+     <application
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+@@ -31,6 +34,7 @@
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
++        <receiver android:name=".EventReminderReceiver" />
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/CheckoutActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\nimport android.app.DatePickerDialog;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.EditText;\r\nimport android.widget.Spinner;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Map;\r\n\r\npublic class CheckoutActivity extends AppCompatActivity {\r\n    // CONSTS\r\n    private static final String LOG_TAG = CheckoutActivity.class.getName();\r\n\r\n    // GLOBAL VARIABLES\r\n    private List<String> bookingsThisDay, timeSlots;\r\n    private TextView taskTextView, officeAddressTextView, availableTextView;\r\n    private EditText datePicker;\r\n    private Spinner timeSpinner, officeSpinner;\r\n    private String officeId, selectedDate, selectedTime;\r\n    private FirebaseFirestore db;\r\n    private FirebaseUser user;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_checkout);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        // INIT\r\n        Intent intent = getIntent();\r\n        String task = intent.getStringExtra(\"task\");\r\n\r\n        db = FirebaseFirestore.getInstance();\r\n        FirebaseAuth auth = FirebaseAuth.getInstance();\r\n        taskTextView = findViewById(R.id.taskTextView);\r\n        datePicker = findViewById(R.id.datePicker);\r\n        timeSpinner = findViewById(R.id.timeSpinner);\r\n        officeSpinner = findViewById(R.id.officeSpinner);\r\n        officeAddressTextView = findViewById(R.id.officeAddressTextView);\r\n        availableTextView = findViewById(R.id.availableTextView);\r\n        user = auth.getCurrentUser();\r\n        taskTextView.setText(task);\r\n        fetchOffices();\r\n\r\n        // DEFAULT STATE - TODAY\r\n        Calendar calendar_today = Calendar.getInstance();\r\n        selectedDate = formatDate(calendar_today.get(Calendar.YEAR), calendar_today.get(Calendar.MONTH), calendar_today.get(Calendar.DAY_OF_MONTH));\r\n        datePicker.setText(selectedDate);\r\n        fetchBookings(selectedDate);\r\n\r\n        // CHANGING DATE\r\n        datePicker.setOnClickListener(v -> {\r\n            final Calendar calendar = Calendar.getInstance();\r\n            int year = calendar.get(Calendar.YEAR);\r\n            int month = calendar.get(Calendar.MONTH);\r\n            int day = calendar.get(Calendar.DAY_OF_MONTH);\r\n\r\n            DatePickerDialog datePickerDialog = new DatePickerDialog(CheckoutActivity.this, (view, selectedYear, selectedMonth, selectedDay) -> {\r\n                selectedDate = formatDate(selectedYear, selectedMonth, selectedDay);\r\n                datePicker.setText(selectedDate);\r\n                fetchBookings(selectedDate);\r\n            }, year, month, day\r\n            );\r\n\r\n            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);\r\n            datePickerDialog.show();\r\n        });\r\n\r\n        // CHANGING OFFICE\r\n        officeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                // update bookings in the selected office\r\n                OfficeDetails selectedOffice = (OfficeDetails) parent.getItemAtPosition(position);\r\n                officeId = selectedOffice.getOfficeID();\r\n                fetchBookings(selectedDate);\r\n\r\n                // update office address\r\n                String updateOfficeAddressTextView = \"Cím: \" + selectedOffice.getAddress();\r\n                officeAddressTextView.setText(updateOfficeAddressTextView);\r\n\r\n                // update availability in the selected office for selected time\r\n                String updateAvailableTextView = \"Férőhelyek száma: \" + availableSpace(selectedTime) + \" fő.\";\r\n                availableTextView.setText(updateAvailableTextView);\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n            }\r\n        });\r\n\r\n        // CHANGING TIME\r\n        timeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                selectedTime = (String) parent.getItemAtPosition(position);\r\n                String updateAvailableTextView = \"Férőhelyek száma: \" + availableSpace(selectedTime) + \" fő.\";\r\n                availableTextView.setText(updateAvailableTextView);\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n    // INSERT RESERVATION TO FIRESTORE\r\n    public void insertReservation(View view) {\r\n        String date = selectedDate;\r\n        String time = selectedTime;\r\n        String email = user.getEmail();\r\n        String task = taskTextView.getText().toString();\r\n\r\n        Map<String, Object> booking = new HashMap<>();\r\n        booking.put(\"date\", date);\r\n        booking.put(\"time\", time);\r\n        booking.put(\"email\", email);\r\n        booking.put(\"task\", task);\r\n        booking.put(\"office_id\", officeId);\r\n\r\n        db.collection(\"bookings\")\r\n                .add(booking)\r\n                .addOnSuccessListener(documentReference -> {\r\n                    Log.d(LOG_TAG, \"Le sikerült foglalni az időpontot\");\r\n                    Toast.makeText(this, \"Sikeres foglalás\", Toast.LENGTH_SHORT).show();\r\n                    finish();\r\n                })\r\n                .addOnFailureListener(e -> {\r\n                    Log.d(LOG_TAG, \"Nem sikerült lefoglalni az időpontot: \" + e.getMessage());\r\n                    Toast.makeText(this, \"Sikertelen foglalás\", Toast.LENGTH_SHORT).show();\r\n                });\r\n    }\r\n\r\n    // GET BOOKINGS FROM FIRESTORE ON SELECTED DATE\r\n    private void fetchBookings(String selectedDate) {\r\n        timeSlots = generateTimeSlots();\r\n        bookingsThisDay = new ArrayList<>();\r\n\r\n        db.collection(\"bookings\")\r\n                .whereEqualTo(\"office_id\", officeId)\r\n                .whereEqualTo(\"date\", selectedDate)\r\n                .get()\r\n                .addOnSuccessListener(querySnapshot -> {\r\n                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {\r\n                        String time = doc.getString(\"time\");\r\n                        bookingsThisDay.add(time);\r\n                    }\r\n\r\n                    // SHOW AVAILABLE ONLY\r\n                    List<String> availableSlots = new ArrayList<>();\r\n                    for(String time : timeSlots){\r\n                        if(availableSpace(time) > 0){\r\n                            availableSlots.add(time);\r\n                        }\r\n                    }\r\n                    updateTimeSlotSpinner(availableSlots);\r\n                })\r\n                .addOnFailureListener(e -> {\r\n                    Log.d(LOG_TAG, \"Nem sikerült betölteni a foglalásokat\");\r\n                    Toast.makeText(this, \"Nem sikerült betölteni az időpontokat\", Toast.LENGTH_SHORT).show();\r\n                });\r\n\r\n    }\r\n\r\n    private void fetchOffices() {\r\n        db.collection(\"offices\")\r\n                .get()\r\n                .addOnSuccessListener(querySnapshot -> {\r\n                    List<OfficeDetails> offices = new ArrayList<>();\r\n\r\n                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {\r\n                        String id = doc.getId();\r\n                        String officeName = doc.getString(\"office\");\r\n                        String address = doc.getString(\"address\");\r\n                        offices.add(new OfficeDetails(id, officeName, address));\r\n                    }\r\n\r\n                    updateOfficeSpinner(offices);\r\n                    Log.d(LOG_TAG, \"Adatok lekérve\");\r\n                })\r\n                .addOnFailureListener(e -> {\r\n                    Toast.makeText(this, \"Nem sikerült lekérni az okmányirodákat \", Toast.LENGTH_SHORT).show();\r\n                    Log.e(LOG_TAG, \"Nem sikerült lekérni az okmányirodákat: \" + e.getMessage());\r\n                });\r\n    }\r\n\r\n    private int availableSpace(String selectedTime) {\r\n        int count = 5;\r\n        for (String time : bookingsThisDay) {\r\n            if (selectedTime.equals(time)) {\r\n                count--;\r\n            }\r\n        }\r\n        return count;\r\n    }\r\n\r\n    private void updateTimeSlotSpinner(List<String> slots) {\r\n        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, slots);\r\n        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        timeSpinner.setAdapter(adapter);\r\n    }\r\n\r\n    private void updateOfficeSpinner(List<OfficeDetails> offices) {\r\n        ArrayAdapter<OfficeDetails> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, offices);\r\n        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        officeSpinner.setAdapter(adapter);\r\n    }\r\n\r\n    public String formatDate(int year, int month, int day) {\r\n        month++;\r\n        String monthZero = \"\";\r\n        String dayZero = \"\";\r\n        if (month < 10) {\r\n            monthZero = \"0\";\r\n        }\r\n        if (day < 10) {\r\n            dayZero = \"0\";\r\n        }\r\n        return year + \".\" + monthZero + month + \".\" + dayZero + day + \".\";\r\n    }\r\n\r\n    private List<String> generateTimeSlots() {\r\n        List<String> slots = new ArrayList<>();\r\n        for (int i = 8; i <= 16; i++) {\r\n            String zero = \"\";\r\n            if (i < 10) {\r\n                zero = \"0\";\r\n            }\r\n            slots.add(zero + i + \":00:00\");\r\n        }\r\n        return slots;\r\n    }\r\n\r\n    public void cancel(View view) {\r\n        finish();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/CheckoutActivity.java b/app/src/main/java/com/example/okmanyirodaugyintezes/CheckoutActivity.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/CheckoutActivity.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/CheckoutActivity.java	(date 1747340703086)
+@@ -1,8 +1,14 @@
+ package com.example.okmanyirodaugyintezes;
+ 
++import android.Manifest;
++import android.app.AlarmManager;
+ import android.app.DatePickerDialog;
++import android.app.PendingIntent;
++import android.content.Context;
+ import android.content.Intent;
++import android.os.Build;
+ import android.os.Bundle;
++import android.provider.Settings;
+ import android.util.Log;
+ import android.view.View;
+ import android.widget.AdapterView;
+@@ -13,6 +19,7 @@
+ import android.widget.Toast;
+ 
+ import androidx.activity.EdgeToEdge;
++import androidx.annotation.RequiresPermission;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.core.graphics.Insets;
+ import androidx.core.view.ViewCompat;
+@@ -23,10 +30,14 @@
+ import com.google.firebase.firestore.DocumentSnapshot;
+ import com.google.firebase.firestore.FirebaseFirestore;
+ 
++import java.text.ParseException;
++import java.text.SimpleDateFormat;
+ import java.util.ArrayList;
+ import java.util.Calendar;
++import java.util.Date;
+ import java.util.HashMap;
+ import java.util.List;
++import java.util.Locale;
+ import java.util.Map;
+ 
+ public class CheckoutActivity extends AppCompatActivity {
+@@ -71,7 +82,7 @@
+ 
+         // DEFAULT STATE - TODAY
+         Calendar calendar_today = Calendar.getInstance();
+-        selectedDate = formatDate(calendar_today.get(Calendar.YEAR), calendar_today.get(Calendar.MONTH), calendar_today.get(Calendar.DAY_OF_MONTH));
++        selectedDate = formatDate(calendar_today.get(Calendar.YEAR), calendar_today.get(Calendar.MONTH), calendar_today.get(Calendar.DAY_OF_MONTH)+1);
+         datePicker.setText(selectedDate);
+         fetchBookings(selectedDate);
+ 
+@@ -89,7 +100,7 @@
+             }, year, month, day
+             );
+ 
+-            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
++            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() + 24 * 60 * 60 * 1000);
+             datePickerDialog.show();
+         });
+ 
+@@ -151,6 +162,7 @@
+                 .addOnSuccessListener(documentReference -> {
+                     Log.d(LOG_TAG, "Le sikerült foglalni az időpontot");
+                     Toast.makeText(this, "Sikeres foglalás", Toast.LENGTH_SHORT).show();
++                    scheduleEventReminder();
+                     finish();
+                 })
+                 .addOnFailureListener(e -> {
+@@ -234,6 +246,72 @@
+         officeSpinner.setAdapter(adapter);
+     }
+ 
++    // Permission, AlarmManager
++    @RequiresPermission(Manifest.permission.SCHEDULE_EXACT_ALARM)
++    public void scheduleEventReminder() {
++        long eventStartMillis = getEventTimeMillis();
++        if(eventStartMillis == -1){
++            return;
++        }
++
++        // 5 hours
++        long reminderTimeMillis = eventStartMillis - (5 * 60 * 60 * 1000);
++
++        // reminder time is in the past
++        if (reminderTimeMillis < System.currentTimeMillis()) {
++            return;
++        }
++
++        Intent intent = new Intent(this, EventReminderReceiver.class);
++        intent.putExtra("title", "Foglalás emlékeztető");
++        intent.putExtra("description", "Rögzített foglalásod van 5 óra múlva");
++
++        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int) eventStartMillis, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
++
++        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
++
++        // permission check to schedule exact alarms
++        boolean permission = false;
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
++            if (alarmManager.canScheduleExactAlarms()) {
++                permission = true;
++                Log.d(LOG_TAG, "Van permission");
++            } else {
++                Intent intentSettings = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
++                startActivity(intentSettings);
++                Log.d(LOG_TAG, "Átirányítás a beállításokba");
++            }
++        } else {
++            permission = true;
++        }
++        if(permission){
++            alarmManager.setExactAndAllowWhileIdle(
++                    AlarmManager.RTC_WAKEUP,
++                    reminderTimeMillis,
++                    pendingIntent
++            );
++            Log.d(LOG_TAG, "Értesítő sikeresen bekapcsolva");
++        }
++        else{
++            Log.d(LOG_TAG, "Értesítő bekapcsolása sikertelen");
++        }
++    }
++
++    public long getEventTimeMillis() {
++        String pattern = "yyyy.MM.dd. HH:mm:ss";
++        SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
++        try {
++            Date date = sdf.parse(selectedDate + " " + selectedTime);
++            if (date != null) {
++                Log.d(LOG_TAG, "Értesítés ekkor: " + date);
++                return date.getTime();
++            }
++        } catch (ParseException e) {
++            Log.e(LOG_TAG, "Nem sikerült átváltani idő formátumba" + e);
++        }
++        return -1;
++    }
++
+     public String formatDate(int year, int month, int day) {
+         month++;
+         String monthZero = "";
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/HomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\n\r\npublic class HomeActivity extends AppCompatActivity {\r\n    // CONSTS\r\n    private static final String LOG_TAG = HomeActivity.class.getName();\r\n\r\n    // GLOBAL VARIABLES\r\n    BottomNavigationView bottomNav;\r\n    ProgressBar homeProgessBar;\r\n    private FirebaseAuth Auth;\r\n    private FirebaseFirestore db;\r\n    private UserDetails userDetails;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        EdgeToEdge.enable(this);\r\n        setContentView(R.layout.activity_home);\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n            return insets;\r\n        });\r\n\r\n        homeProgessBar = findViewById(R.id.homeProgressBar);\r\n        bottomNav = findViewById(R.id.bottom_navigation);\r\n        bottomNav.setOnItemSelectedListener(navListener);\r\n\r\n        // VALIDATING USER\r\n        Auth = FirebaseAuth.getInstance();\r\n        db = FirebaseFirestore.getInstance();\r\n        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();\r\n\r\n        if(savedInstanceState == null){\r\n            if (user != null) {\r\n                homeProgessBar.setVisibility(View.VISIBLE);\r\n                fetchUserData(user.getUid());\r\n                Log.d(LOG_TAG, \"Sikeres bejelentkezés\");\r\n            } else {\r\n                Log.d(LOG_TAG, \"Sikertelen bejelentkezés\");\r\n                finish();\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n    // GET USER DATA FROM FIRESTORE\r\n    private void fetchUserData(String userId) {\r\n        db.collection(\"users\").document(userId)\r\n                .get()\r\n                .addOnSuccessListener(documentSnapshot -> {\r\n                    if (documentSnapshot.exists()) {\r\n                        String fullName = documentSnapshot.getString(\"fullName\");\r\n                        String phoneNumber = documentSnapshot.getString(\"phone\");\r\n                        String postalAddress = documentSnapshot.getString(\"address\");\r\n                        userDetails = new UserDetails(fullName, phoneNumber, postalAddress);\r\n                        Log.d(LOG_TAG, \"Adatok lekérve\");\r\n                        homeProgessBar.setVisibility(View.GONE);\r\n\r\n                        // Default fragment\r\n                        getSupportFragmentManager().beginTransaction()\r\n                                .replace(R.id.fragment_container, ReservationFragment.newInstance(userDetails))\r\n                                .commit();\r\n                    }\r\n                })\r\n                .addOnFailureListener(e -> {\r\n                    Toast.makeText(this, \"Nem sikerült lekérni az adatokat: \" + e.getMessage(), Toast.LENGTH_SHORT).show();\r\n                    Log.e(LOG_TAG, \"Nem sikerült lekérni az adatokat: \" + e.getMessage());\r\n                });\r\n    }\r\n\r\n    // LOG OUT\r\n    public void signOut(View view) {\r\n        try {\r\n            Auth.signOut();\r\n            Log.d(LOG_TAG, \"Sikeres kijelentkezés.\");\r\n            Toast.makeText(this, \"Sikeres kijelentkezés\", Toast.LENGTH_SHORT).show();\r\n\r\n            startActivity(new Intent(HomeActivity.this, MainActivity.class));\r\n            finish();\r\n        } catch (Exception e) {\r\n            Log.e(LOG_TAG, \"Sikertelen kijelentkezés: \" + e.getMessage());\r\n        }\r\n    }\r\n\r\n    private final BottomNavigationView.OnItemSelectedListener navListener = item -> {\r\n        Fragment selectedFragment;\r\n        int itemId = item.getItemId();\r\n\r\n        if (itemId == R.id.nav_reservation) {\r\n            selectedFragment = ReservationFragment.newInstance(userDetails);\r\n        } else if (itemId == R.id.nav_booked) {\r\n            selectedFragment = BookedFragment.newInstance(userDetails);\r\n        } else if (itemId == R.id.nav_useredit) {\r\n            selectedFragment = UserEditFragment.newInstance(userDetails);\r\n        } else {\r\n            return false;\r\n        }\r\n\r\n        getSupportFragmentManager().beginTransaction()\r\n                .replace(R.id.fragment_container, selectedFragment)\r\n                .commit();\r\n\r\n        return true;\r\n    };\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/HomeActivity.java b/app/src/main/java/com/example/okmanyirodaugyintezes/HomeActivity.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/HomeActivity.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/HomeActivity.java	(date 1746736884164)
+@@ -8,11 +8,13 @@
+ import android.widget.Toast;
+ 
+ import androidx.activity.EdgeToEdge;
++import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.core.graphics.Insets;
+ import androidx.core.view.ViewCompat;
+ import androidx.core.view.WindowInsetsCompat;
+ import androidx.fragment.app.Fragment;
++import androidx.lifecycle.ViewModelProvider;
+ 
+ import com.google.android.material.bottomnavigation.BottomNavigationView;
+ import com.google.firebase.auth.FirebaseAuth;
+@@ -60,25 +62,42 @@
+                 finish();
+             }
+         }
++        else{
++            bottomNav.setSelectedItemId(savedInstanceState.getInt("NAV_POSITION"));
++        }
+ 
++        // Observe ViewModel to reload fragments AFTER data is ready
++        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
++        userViewModel.getUserDetails().observe(this, userDetails -> {
++            if (userDetails != null && bottomNav.getSelectedItemId() == R.id.nav_reservation) {
++                getSupportFragmentManager().beginTransaction()
++                        .replace(R.id.fragment_container, new ReservationFragment())
++                        .commit();
++            }
++        });
+     }
+ 
+     // GET USER DATA FROM FIRESTORE
+     private void fetchUserData(String userId) {
++        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
++
+         db.collection("users").document(userId)
+                 .get()
+                 .addOnSuccessListener(documentSnapshot -> {
+                     if (documentSnapshot.exists()) {
+-                        String fullName = documentSnapshot.getString("fullName");
+-                        String phoneNumber = documentSnapshot.getString("phone");
+-                        String postalAddress = documentSnapshot.getString("address");
+-                        userDetails = new UserDetails(fullName, phoneNumber, postalAddress);
++                        userDetails = new UserDetails(
++                                documentSnapshot.getString("fullName"),
++                                documentSnapshot.getString("phone"),
++                                documentSnapshot.getString("address")
++                        );
++                        userViewModel.setUserDetails(userDetails); // Store in ViewModel for accessibility
++                        homeProgessBar.setVisibility(View.GONE);
++
+                         Log.d(LOG_TAG, "Adatok lekérve");
+-                        homeProgessBar.setVisibility(View.GONE);
+ 
+                         // Default fragment
+                         getSupportFragmentManager().beginTransaction()
+-                                .replace(R.id.fragment_container, ReservationFragment.newInstance(userDetails))
++                                .replace(R.id.fragment_container, new ReservationFragment())
+                                 .commit();
+                     }
+                 })
+@@ -102,16 +121,17 @@
+         }
+     }
+ 
++    // BOTTOM NAVBAR
+     private final BottomNavigationView.OnItemSelectedListener navListener = item -> {
+         Fragment selectedFragment;
+         int itemId = item.getItemId();
+ 
+         if (itemId == R.id.nav_reservation) {
+-            selectedFragment = ReservationFragment.newInstance(userDetails);
++            selectedFragment = new ReservationFragment();
+         } else if (itemId == R.id.nav_booked) {
+-            selectedFragment = BookedFragment.newInstance(userDetails);
++            selectedFragment = new BookedFragment();
+         } else if (itemId == R.id.nav_useredit) {
+-            selectedFragment = UserEditFragment.newInstance(userDetails);
++            selectedFragment = new UserEditFragment();
+         } else {
+             return false;
+         }
+@@ -122,4 +142,11 @@
+ 
+         return true;
+     };
++
++    // SAVE NAVBAR POSITION AFTER ROTATING SCREEN (LifeCycle Hook)
++    @Override
++    protected void onSaveInstanceState(@NonNull Bundle outState) {
++        super.onSaveInstanceState(outState);
++        outState.putInt("NAV_POSITION", bottomNav.getSelectedItemId());
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/okmanyirodaugyintezes/OfficeDetails.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.okmanyirodaugyintezes;\r\n\r\npublic class OfficeDetails {\r\n    private final String OfficeID, Name, Address;\r\n\r\n    public OfficeDetails(String OfficeID, String Name, String Address) {\r\n        this.OfficeID = OfficeID;\r\n        this.Name = Name;\r\n        this.Address = Address;\r\n    }\r\n\r\n    public String getOfficeID() {\r\n        return OfficeID;\r\n    }\r\n    public String getAddress() {\r\n        return Address;\r\n    }\r\n\r\n    public String getName() {\r\n        return Name;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/okmanyirodaugyintezes/OfficeDetails.java b/app/src/main/java/com/example/okmanyirodaugyintezes/OfficeDetails.java
+--- a/app/src/main/java/com/example/okmanyirodaugyintezes/OfficeDetails.java	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/app/src/main/java/com/example/okmanyirodaugyintezes/OfficeDetails.java	(date 1745938225847)
+@@ -1,5 +1,7 @@
+ package com.example.okmanyirodaugyintezes;
+ 
++import androidx.annotation.NonNull;
++
+ public class OfficeDetails {
+     private final String OfficeID, Name, Address;
+ 
+@@ -19,4 +21,10 @@
+     public String getName() {
+         return Name;
+     }
++
++    @NonNull
++    @Override
++    public String toString() {
++        return Name;
++    }
+ }
+\ No newline at end of file

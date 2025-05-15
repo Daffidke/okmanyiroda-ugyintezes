@@ -1,5 +1,7 @@
 package com.example.okmanyirodaugyintezes;
 
+import androidx.annotation.NonNull;
+
 public class OfficeDetails {
     private final String OfficeID, Name, Address;
 
@@ -17,6 +19,12 @@ public class OfficeDetails {
     }
 
     public String getName() {
+        return Name;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
         return Name;
     }
 }

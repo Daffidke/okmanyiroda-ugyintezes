@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,6 @@ import java.util.Objects;
 public class BookedFragment extends Fragment {
     // CONSTS
     private static final String LOG_TAG = BookedFragment.class.getName();
-    private static final String ARG_USER = "user";
 
     // GLOBAL VARIABLES
     private TextView emptyTextView;
@@ -38,27 +36,15 @@ public class BookedFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseUser user;
     RecyclerView recyclerView;
-    private UserDetails userDetails;
 
     public BookedFragment() {
         super(R.layout.fragment_booked);
     }
 
     // GET ARGUMENTS FROM ACTIVITY
-    public static BookedFragment newInstance(UserDetails userDetails) {
-        BookedFragment fragment = new BookedFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_USER, userDetails);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);
-        }
     }
 
     // MAKING CHANGES ON UI
@@ -164,19 +150,5 @@ public class BookedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_booked, container, false);
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null) {
-            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it
-        }
     }
 }

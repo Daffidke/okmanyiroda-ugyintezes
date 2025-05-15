@@ -37,7 +37,9 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
+    implementation(libs.fragment)
     implementation(libs.constraintlayout)
+    implementation(libs.lifecycle.viewmodel.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -47,8 +49,12 @@ dependencies {
     implementation(libs.firebase.firestore.v24111)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.storage)
     implementation(libs.play.services.auth)
     implementation(libs.multidex)
+
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
     implementation(libs.material.v1110)
 }

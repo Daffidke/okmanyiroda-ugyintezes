@@ -1,0 +1,21 @@
+Index: .idea/deploymentTargetSelector.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetSelector\">\r\n    <selectionStates>\r\n      <SelectionState runConfigName=\"app\">\r\n        <option name=\"selectionMode\" value=\"DROPDOWN\" />\r\n        <DropdownSelection timestamp=\"2025-04-28T10:20:44.282577100Z\">\r\n          <Target type=\"DEFAULT_BOOT\">\r\n            <handle>\r\n              <DeviceId pluginId=\"Default\" identifier=\"serial=192.168.31.212:42991;connection=1a2fbb77\" />\r\n            </handle>\r\n          </Target>\r\n        </DropdownSelection>\r\n        <DialogSelection />\r\n      </SelectionState>\r\n    </selectionStates>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+--- a/.idea/deploymentTargetSelector.xml	(revision c6fba4eeb4f662fc5f420d1a5f7a32d9a2457f48)
++++ b/.idea/deploymentTargetSelector.xml	(date 1747328438879)
+@@ -4,10 +4,10 @@
+     <selectionStates>
+       <SelectionState runConfigName="app">
+         <option name="selectionMode" value="DROPDOWN" />
+-        <DropdownSelection timestamp="2025-04-28T10:20:44.282577100Z">
++        <DropdownSelection timestamp="2025-05-15T16:53:25.678994100Z">
+           <Target type="DEFAULT_BOOT">
+             <handle>
+-              <DeviceId pluginId="Default" identifier="serial=192.168.31.212:42991;connection=1a2fbb77" />
++              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\barka\.android\avd\Medium_Phone.avd" />
+             </handle>
+           </Target>
+         </DropdownSelection>

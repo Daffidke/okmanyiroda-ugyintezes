@@ -8,11 +8,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -60,25 +62,42 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         }
+        else{
+            bottomNav.setSelectedItemId(savedInstanceState.getInt("NAV_POSITION"));
+        }
 
+        // Observe ViewModel to reload fragments AFTER data is ready
+        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel.getUserDetails().observe(this, userDetails -> {
+            if (userDetails != null && bottomNav.getSelectedItemId() == R.id.nav_reservation) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new ReservationFragment())
+                        .commit();
+            }
+        });
     }
 
     // GET USER DATA FROM FIRESTORE
     private void fetchUserData(String userId) {
+        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
         db.collection("users").document(userId)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        String fullName = documentSnapshot.getString("fullName");
-                        String phoneNumber = documentSnapshot.getString("phone");
-                        String postalAddress = documentSnapshot.getString("address");
-                        userDetails = new UserDetails(fullName, phoneNumber, postalAddress);
-                        Log.d(LOG_TAG, "Adatok lekérve");
+                        userDetails = new UserDetails(
+                                documentSnapshot.getString("fullName"),
+                                documentSnapshot.getString("phone"),
+                                documentSnapshot.getString("address")
+                        );
+                        userViewModel.setUserDetails(userDetails); // Store in ViewModel for accessibility
                         homeProgessBar.setVisibility(View.GONE);
+
+                        Log.d(LOG_TAG, "Adatok lekérve");
 
                         // Default fragment
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_container, ReservationFragment.newInstance(userDetails))
+                                .replace(R.id.fragment_container, new ReservationFragment())
                                 .commit();
                     }
                 })
@@ -102,16 +121,17 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    // BOTTOM NAVBAR
     private final BottomNavigationView.OnItemSelectedListener navListener = item -> {
         Fragment selectedFragment;
         int itemId = item.getItemId();
 
         if (itemId == R.id.nav_reservation) {
-            selectedFragment = ReservationFragment.newInstance(userDetails);
+            selectedFragment = new ReservationFragment();
         } else if (itemId == R.id.nav_booked) {
-            selectedFragment = BookedFragment.newInstance(userDetails);
+            selectedFragment = new BookedFragment();
         } else if (itemId == R.id.nav_useredit) {
-            selectedFragment = UserEditFragment.newInstance(userDetails);
+            selectedFragment = new UserEditFragment();
         } else {
             return false;
         }
@@ -122,4 +142,11 @@ public class HomeActivity extends AppCompatActivity {
 
         return true;
     };
+
+    // SAVE NAVBAR POSITION AFTER ROTATING SCREEN (LifeCycle Hook)
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("NAV_POSITION", bottomNav.getSelectedItemId());
+    }
 }

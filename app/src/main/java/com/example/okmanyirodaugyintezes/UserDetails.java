@@ -1,11 +1,5 @@
 package com.example.okmanyirodaugyintezes;
 
-import android.graphics.drawable.Drawable;
-import android.view.animation.AlphaAnimation;
-import android.widget.EditText;
-
-import androidx.core.content.ContextCompat;
-
 import java.io.Serializable;
 
 public class UserDetails implements Serializable {
@@ -15,6 +9,12 @@ public class UserDetails implements Serializable {
         this.FullName = FullName;
         this.PhoneNumber = PhoneNumber;
         this.PostalAddress = PostalAddress;
+    }
+
+    public UserDetails(UserDetails u){
+        this.FullName = u.getFullName();
+        this.PhoneNumber = u.getPhoneNumber();
+        this.PostalAddress = u.getPostalAddress();
     }
 
     // GETTER SETTER

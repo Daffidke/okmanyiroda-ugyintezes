@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,11 +29,11 @@ import java.util.Map;
 public class UserEditFragment extends Fragment {
     // CONSTS
     private static final String LOG_TAG = UserEditFragment.class.getName();
-    private static final String ARG_USER = "user";
 
     // GLOBAL VARIABLES
     private EditText fullNameEditText, phoneNumberEditText, postalAddressEditText;
     private UserDetails userDetails;
+    private UserViewModel userViewModel;
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
     private Button updateButton;
@@ -43,20 +44,10 @@ public class UserEditFragment extends Fragment {
     }
 
     // GET ARGUMENTS FROM ACTIVITY
-    public static UserEditFragment newInstance(UserDetails userDetails) {
-        UserEditFragment fragment = new UserEditFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_USER, userDetails);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            userDetails = (UserDetails) getArguments().getSerializable(ARG_USER);
-        }
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
     }
 
     // MAKING CHANGES ON UI
@@ -75,11 +66,14 @@ public class UserEditFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
         // PASS USER DETAILS ON LOAD
-        if (userDetails != null) {
-            fullNameEditText.setText(userDetails.getFullName());
-            phoneNumberEditText.setText(userDetails.getPhoneNumber());
-            postalAddressEditText.setText(userDetails.getPostalAddress());
-        }
+        userViewModel.getUserDetails().observe(getViewLifecycleOwner(), userDetails -> {
+            if (userDetails != null) {
+                this.userDetails = new UserDetails(userDetails);
+                fullNameEditText.setText(userDetails.getFullName());
+                phoneNumberEditText.setText(userDetails.getPhoneNumber());
+                postalAddressEditText.setText(userDetails.getPostalAddress());
+            }
+        });
     }
 
     // UPDATING USER DETAILS
@@ -165,19 +159,4 @@ public class UserEditFragment extends Fragment {
 
         editText.startAnimation(fadeIn);
     }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putSerializable(ARG_USER, userDetails); // Save user details if needed
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null) {
-            userDetails = (UserDetails) savedInstanceState.getSerializable(ARG_USER); // Restore it
-        }
-    }
-
 }
