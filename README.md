@@ -34,15 +34,37 @@ ___
 
 ## 2. Mérföldkő *(2025. május 18. 23:55)*
 ### Értékelési szempontok:
-* N/A
+* Előző mérföldkő szerint, és:
+* Adatmodell definiálása:
+  * *UserDetails, OfficeDetails, UserViewModel*
+* Legalább 4 Activity:
+  * *4 activity, 3 fragment*
+* Legalább 2 animáció:
+  * *Naptár kép, foglalás törlése*
+* Lifecycle Hook:
+  * *email és jelszó megjegyzése loginról regisztrációra menet*
+* Android erőforrás:
+  * *értesítés permission*
+* 2 rendszerszolgáltatás:
+  * *AlarmManager, NotificationManager*
+* CRUD:
+  * *C: időpont foglalása, regisztráció*
+  * *R: időpontok, felhasználói adatok megjelenítése*
+  * *U: felhasználó módosítása*
+  * *D: időpont törlése*
+* 3 komplex lekérdezés:
+  * *CheckoutActivity.fetchBookings()*
+  * *BookedFragment.fetchUserBookings()*
+  * *BookedFragment.deleteBooking())*
 ___
 
 ## A projekt során használt eszközök
 * Lenovo Ideapad 520
+* Asus Vivobook 17
 * Motorola Edge 40 Neo
-* Android Studio
+* Android Studio / Emulator
 * Java
 * GitHub
-* Firebase Cloud
+* Firebase Cloud / Firestore
 
 ___
